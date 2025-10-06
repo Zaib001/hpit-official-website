@@ -662,7 +662,7 @@ export default function ThreatIntelligence() {
                     />
                   </span>
                 </div>
-              </button>
+             </button>
             </motion.article>
 
             {/* Card 2 */}
