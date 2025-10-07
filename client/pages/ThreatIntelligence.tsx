@@ -10,7 +10,7 @@ import arrow from "../svg/Arrow 1.svg";
 import img1 from "../Images/Pexels Photo by Vika Glitter.png";
 import img2 from "../Images/img.png";
 import line from "../svg/new-line.svg";
-import karuka from "../Images/Pexels Photo by Canva Studio.png";
+import karuka from "../Images/Pexels Photo by Canva Studio (2).png";
 import icon1 from "../svg/cardIcon1.svg";
 import icon2 from "../svg/cardIcon2.svg";
 import icon3 from "../svg/cardIcon3.svg";
