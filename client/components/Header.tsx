@@ -7,7 +7,7 @@ import hamburger from "../svg/Vector (5).svg";
 import search from "../svg/Vector (6).svg";
 import web from "../svg/Group (3).svg";
 import cross from "../svg/close-line-icon (1).svg";
-
+import logo from '../Images/logo.png'
 const navigationItems = [
   { name: "Company", href: "/company" },
   { name: "Capabilities", href: "/capabilities" },
@@ -28,10 +28,15 @@ export default function Header() {
           {/* Logo */}
           <Link
             to="/"
-            className="text-white text-2xl sm:text-xl font-extrabold tracking-tight whitespace-nowrap"
+            className="flex items-center w-[90px] sm:w-[140px] h-[56px] md:h-[30px] opacity-100 mt-4"
           >
-            HPIT
+            <img
+              src={logo}
+              alt="HPIT Logo"
+              className="w-full h-full object-contain"
+            />
           </Link>
+
 
           {/* Desktop Nav (centered) */}
           <nav className="hidden md:flex items-center justify-center flex-1 space-x-8">

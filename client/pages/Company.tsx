@@ -1,15 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { motion, useAnimation } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, useAnimation, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { Plus, X, ChevronUp, ChevronDown } from "lucide-react";
 
 import backgroundImage from "@/Images/frame1.png";
-import team1 from "@/Images/Pexels Photo by Daniel Xavier.jpg";
-import team2 from "@/Images/Pexels Photo by Italo Melo.jpg";
-import team3 from "@/Images/Pexels Photo by Guilherme  Almeida.jpg";
-import team4 from "@/Images/Pexels Photo by Andrea Piacquadio.jpg";
+import cloud from "@/Images/cloud.png";
+import desktop from "@/Images/desktop.png";
+import automation from "@/Images/automation.png";
 
 import decoImg1 from "../Images/decoimg.png";
 import arrow from "@/svg/arrow.svg";
@@ -34,6 +32,7 @@ import icon3 from "../svg/03.svg";
 import icon4 from "../svg/04.svg";
 
 import decoImg from "../Images/weDO.png";
+import decoImg2 from "../Images/stay.png";
 import techImg from "../Images/tech.jpg";
 import businessImg from "../Images/business.jpg";
 import consultingImg from "../Images/consulting.jpg";
@@ -57,6 +56,10 @@ import Gener8 from "../Images/ai-img-3.png";
 import ring from "@/Images/ring.png";
 import r1 from "@/Images/r1.png";
 import r2 from "@/Images/r2.png";
+import WhatWeDoSection from "../components/WhatWeDoSection";
+import InsightSection from "@/components/InsightSection";
+import AwardsSection from "@/components/AwardsSection";
+import ServicesCarousel from "@/components/ServicesCarousel";
 
 /* ----------------------------- Anim helpers ----------------------------- */
 const fadeUp = (delay = 0) => ({
@@ -66,6 +69,11 @@ const fadeUp = (delay = 0) => ({
     y: 0,
     transition: { duration: 0.8, delay, ease: "easeOut" },
   },
+});
+
+const pop = (delay = 0) => ({
+  hidden: { opacity: 0, scale: 0.96 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.6, delay } },
 });
 
 const container = {
@@ -114,7 +122,7 @@ const values = [
   { title: "Teamwork", text: "Adaptability to changing needs.", color: "#B77DFA" },
 ];
 
-const cards = [
+const cards1 = [
   { icon: icon1, title: "COLLABORATION", text: "We work hand-in-hand with clients and teams to achieve shared goals." },
   { icon: icon2, title: "INNOVATION", text: "We embrace creativity and technology to deliver smarter solutions." },
   { icon: icon3, title: "QUALITY COMMITMENT", text: "We ensure high standards to deliver reliable and impactful results." },
@@ -205,10 +213,91 @@ const ToolBadge = ({
   </div>
 );
 
+const journeyData = [
+  {
+    year: 2021,
+    text: "We adopted modern tools to drive flexibility and enable the secure deployment of a distributed ecosystem.",
+  },
+  {
+    year: 2022,
+    text: "We advanced to agile development, building data-intensive applications and reducing deployment time from weeks to days.",
+  },
+  {
+    year: 2023,
+    text: "We scaled our infrastructure globally, enhancing system resilience and implementing full CI/CD automation pipelines.",
+  },
+  {
+    year: 2024,
+    text: "We integrated AI-driven analytics to power smarter decisions, optimize performance, and enhance user experiences.",
+  },
+  {
+    year: 2025,
+    text: "We are focusing on innovation, creating next-gen digital products that redefine speed, scalability, and sustainability.",
+  },
+];
+
 /* ======================================================================== */
 
 export default function Company() {
-  const [openIndex, setOpenIndex] = useState(1);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const nextIndex = activeIndex === journeyData.length - 1 ? 0 : activeIndex + 1;
+
+  let slideInterval;
+
+  useEffect(() => {
+    if (!isPaused) {
+      slideInterval = setInterval(() => {
+        setActiveIndex((prev) =>
+          prev === journeyData.length - 1 ? 0 : prev + 1
+        );
+      }, 5000);
+    }
+
+    return () => clearInterval(slideInterval);
+  }, [isPaused]);
+
+  const handlePrev = () => {
+    setActiveIndex((prev) =>
+      prev === 0 ? journeyData.length - 1 : prev - 1
+    );
+    resetAutoSlide();
+  };
+
+  const handleNext = () => {
+    setActiveIndex((prev) =>
+      prev === journeyData.length - 1 ? 0 : prev + 1
+    );
+    resetAutoSlide();
+  };
+
+  const resetAutoSlide = () => {
+    setIsPaused(true);
+    clearInterval(slideInterval);
+    setTimeout(() => {
+      setIsPaused(false);
+    }, 8000);
+  };
+
+
+
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  // Parallax motion for background & top image
+  const yBg = useTransform(scrollYProgress, [0, 1], [0, 100]);
+  const yTop = useTransform(scrollYProgress, [0, 1], [0, -80]);
+
+  const cards = [
+    { img: MindfulChef, title: "INDUSTRY TRENDS", desc: "Emerging trends shaping the future of business and technology." },
+    { img: Thursday, title: "CASE STUDIES", desc: "Real success stories showcasing our impact and expertise." },
+    { img: Gener8, title: "RESEARCH REPORT", desc: "In-depth analysis to guide smarter strategies and decisions." },
+    { img: MindfulChef, title: "AI & AUTOMATION", desc: "Exploring how AI is transforming industries worldwide." },
+    { img: Thursday, title: "DIGITAL FUTURE", desc: "Innovations driving the next wave of digital transformation." },
+  ];
 
   return (
     <div className="min-h-screen flex flex-col bg-black">
@@ -415,54 +504,81 @@ export default function Company() {
 
       {/* ===================== CORE VALUES ===================== */}
       <FadeInSection delay={0.3}>
-        <div className="relative py-20 px-4 sm:px-8 lg:px-10 flex justify-center items-center">
-          <div
-            className="relative w-full lg:w-[1296px] min-h-[560px] lg:h-[650px] rounded-[8px] border border-[#22252B] overflow-hidden"
-            style={{
-              background:
-                "linear-gradient(0deg, #000000, #000000), linear-gradient(103.31deg, rgba(0, 0, 0, 0) 33.01%, rgba(26, 188, 254, 0.2) 143.6%)",
-            }}
+        <div
+          ref={ref}
+          className="relative py-20 px-4 sm:px-8 lg:px-10 flex justify-center items-center"
+        >
+          <motion.div
+            style={{ y: yBg }}
+            className="relative w-full lg:w-[1296px] min-h-[560px] lg:h-[650px] rounded-[8px] border border-[#22252B] overflow-hidden backdrop-blur-sm"
           >
+            {/* Background gradient */}
             <div
-              className="absolute z-10 right-0 -top-8 w-[60%] max-w-[520px] h-auto lg:w-[657px] lg:h-[315px] lg:top-[-142px] lg:left-[851px]"
-              style={{ opacity: 1 }}
-            >
-              <img src={top} alt="Decorative Top Right" className="w-full h-full object-contain" />
-            </div>
+              className="absolute inset-0"
+              style={{
+                background:
+                  "linear-gradient(0deg, #000000, #000000), linear-gradient(103.31deg, rgba(0, 0, 0, 0) 33.01%, rgba(26, 188, 254, 0.2) 143.6%)",
+              }}
+            />
 
-            <div className="hidden lg:block absolute z-0" style={{ top: "525px", left: "122px" }}>
-              <h1
+            {/* Top decorative image with parallax */}
+            <motion.div
+              style={{ y: yTop }}
+              className="absolute z-10 right-0 -top-8 w-[60%] max-w-[520px] h-auto lg:w-[657px] lg:h-[315px] lg:top-[-142px] lg:left-[851px]"
+            >
+              <img
+                src={top}
+                alt="Decorative Top Right"
+                className="w-full h-full object-contain opacity-90 hover:scale-105 transition-transform duration-700 ease-out"
+              />
+            </motion.div>
+
+            {/* Giant Background Text */}
+            <div
+              className="hidden lg:block absolute z-0"
+              style={{ top: "525px", left: "122px" }}
+            >
+              <motion.h1
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 0.06 }}
+                transition={{ duration: 1 }}
                 className="font-poppins font-semibold select-none"
                 style={{
                   fontSize: "398px",
                   lineHeight: "110px",
-                  opacity: 0.06,
                   color: "#FFFFFF",
                   letterSpacing: "0px",
                   position: "absolute",
                 }}
               >
                 FIRST
-              </h1>
+              </motion.h1>
             </div>
 
+            {/* Foreground content */}
             <div className="relative z-10 mx-auto px-6 py-10 lg:py-12 w-full">
-              <h2
-                className="text-left font-poppins font-semibold text-transparent bg-clip-text text-4xl md:text-5xl relative lg:absolute"
+              {/* Animated shimmer title */}
+              <motion.h2
+                className="text-left font-poppins font-semibold text-4xl md:text-5xl relative lg:absolute"
                 style={{
                   top: "65px",
                   left: "40px",
-                  position: "absolute",
                   background:
                     "radial-gradient(425.56% 425.56% at 50% 50%, #8076F4 0%, #FFFFFF 9.96%)",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
                 }}
+                initial={{ backgroundPosition: "0% 50%" }}
+                animate={{
+                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                }}
+                transition={{ duration: 8, repeat: Infinity }}
               >
                 <span className="block lg:hidden mb-6">Our Core Value</span>
                 <span className="hidden lg:block">Our Core Value</span>
-              </h2>
+              </motion.h2>
 
+              {/* Value grid */}
               <div
                 className="grid text-left gap-8 sm:gap-10 md:gap-12 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 mt-24 sm:mt-28 lg:mt-0 relative lg:absolute"
                 style={{
@@ -476,37 +592,57 @@ export default function Company() {
                 {values.map((val, i) => (
                   <motion.div
                     key={val.title}
-                    initial={{ opacity: 0, y: 20 }}
+                    className="flex flex-col items-start group cursor-pointer relative"
+                    initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: i * 0.15 }}
+                    transition={{ duration: 0.8, delay: i * 0.15 }}
                     viewport={{ once: true, amount: 0.3 }}
-                    className="flex flex-col items-start"
+                    whileHover={{
+                      scale: 1.05,
+                      y: -6,
+                      transition: { type: "spring", stiffness: 200 },
+                    }}
                   >
+                    {/* Hover glow */}
+                    <motion.div
+                      className="absolute -inset-1 rounded-xl opacity-0 group-hover:opacity-30 blur-xl"
+                      style={{ backgroundColor: val.color }}
+                      transition={{ duration: 0.4 }}
+                    />
+                    {/* Line indicator */}
                     <div
-                      className="flex items-center mb-4 w-full max-w-[200px]"
+                      className="flex items-center mb-4 w-full max-w-[200px] transition-all duration-500"
                       style={{ height: "20px", gap: "5px", opacity: 1 }}
                     >
-                      <div
+                      <motion.div
                         className="w-[12px] h-[12px] rounded-full flex-shrink-0"
                         style={{ backgroundColor: val.color }}
+                        whileHover={{ scale: 1.4 }}
                       />
-                      <div className="h-[2px] flex-1" style={{ backgroundColor: val.color }} />
+                      <motion.div
+                        className="h-[2px] flex-1"
+                        style={{ backgroundColor: val.color }}
+                        whileHover={{ width: "120%" }}
+                      />
                     </div>
 
-                    <h3 className="font-semibold text-[#DADBDD] text-lg md:text-xl">{val.title}</h3>
-                    <p className="text-[#DADBDD] mt-2 text-base md:text-[18px] leading-relaxed">
+                    <h3 className="font-semibold text-[#DADBDD] text-lg md:text-xl group-hover:text-white transition-colors">
+                      {val.title}
+                    </h3>
+                    <p className="text-[#DADBDD] mt-2 text-base md:text-[18px] leading-relaxed group-hover:text-gray-200 transition-colors duration-500">
                       {val.text}
                     </p>
                   </motion.div>
                 ))}
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </FadeInSection>
 
       {/* ===================== JOURNEY ===================== */}
       <div className="py-16 sm:py-20 px-6 md:px-12 lg:px-24 mx-auto">
+        {/* Title */}
         <motion.h2
           variants={fadeUp(0)}
           initial="hidden"
@@ -527,6 +663,7 @@ export default function Company() {
           </span>
         </motion.h2>
 
+        {/* Subtext */}
         <motion.p
           variants={fadeUp(0.1)}
           initial="hidden"
@@ -538,72 +675,136 @@ export default function Company() {
           commitment to creating lasting value.
         </motion.p>
 
+        {/* Journey Card */}
         <motion.div
           variants={fadeUp(0.2)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, amount: 0.25 }}
-          className="relative w-full max-w-[1296px] rounded-lg border border-[#444955] p-6 sm:p-8 md:p-12 bg-cover mt-10 sm:mt-14 md:mt-16"
+          className="relative w-full h-[55vh] max-w-[1296px] rounded-lg border border-[#444955] p-6 sm:p-8 md:p-12 bg-cover mt-10 sm:mt-14 md:mt-16 overflow-hidden"
           style={{ backgroundImage: `url(${bgjourney})` }}
         >
+          {/* Side Controls */}
           <div className="absolute left-4 sm:left-6 md:left-[80px] top-6 bottom-6 flex flex-col items-center">
             <motion.div
-              whileHover={{ y: -4 }}
+              whileHover={{ y: -4, scale: 1.1 }}
+              onClick={handlePrev}
               className="mb-4 cursor-pointer text-gray-400 hover:text-[#f4a076] transition"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 15l7-7 7 7" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M5 15l7-7 7 7"
+                />
               </svg>
             </motion.div>
 
+            {/* Timeline line */}
             <div className="flex-1 w-[2px] bg-gray-500 relative">
               <motion.div
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 2, repeat: Infinity }}
-                className="absolute top-[24%] -ml-[10px] w-6 h-6 rounded-full border-2 border-red-500 bg-black flex items-center justify-center"
+                animate={{
+                  y: `${(activeIndex / (journeyData.length - 1)) * 100}%`,
+                }}
+                transition={{ type: "spring", stiffness: 60, damping: 15 }}
+                className="absolute -ml-[10px] w-6 h-6 rounded-full border-2 border-red-500 bg-black flex items-center justify-center shadow-[0_0_15px_rgba(255,0,0,0.5)]"
               >
-                <div className="w-3 h-3 rounded-full bg-red-500" />
+                <motion.div
+                  animate={{ scale: [1, 1.4, 1] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                  className="w-3 h-3 rounded-full bg-red-500"
+                />
               </motion.div>
             </div>
 
             <motion.div
-              whileHover={{ y: 4 }}
+              whileHover={{ y: 4, scale: 1.1 }}
+              onClick={handleNext}
               className="mt-4 cursor-pointer text-gray-400 hover:text-[#8076F4] transition"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M19 9l-7 7-7-7"
+                />
               </svg>
             </motion.div>
           </div>
 
-          <div className="flex flex-col gap-10 sm:gap-12 md:gap-[62px] ml-14 sm:ml-24 md:ml-40 mt-10 sm:mt-12 md:mt-16">
-            <motion.div variants={fadeUp(0.3)} initial="hidden" whileInView="show" className="flex flex-col md:flex-row items-start gap-5 sm:gap-6 md:gap-8">
-              <div className="w-full md:w-[180px]">
-                <h2 className="text-[40px] sm:text-[48px] md:text-[64px] leading-[1.1] md:leading-[72px] font-poppins font-semibold text-[#ECEDEE]">
-                  2021
-                </h2>
-              </div>
-              <div className="flex-grow">
-                <p className="text-base md:text-[20px] text-[#ECEDEE] font-poppins leading-relaxed">
-                  We adopted modern tools to drive flexibility and enable the
-                  secure deployment of a distributed ecosystem.
-                </p>
-              </div>
-            </motion.div>
+          {/* Years Data */}
+          <div className="flex flex-col gap-8 ml-14 sm:ml-24 md:ml-40 mt-10 sm:mt-12 md:mt-16 relative overflow-hidden">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={journeyData[activeIndex].year}
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -40 }}
+                transition={{ duration: 0.8 }}
+                className="flex flex-col md:flex-row items-start gap-5 sm:gap-6 md:gap-8 relative"
+              >
+                {/* Active Year */}
+                <div className="w-full md:w-[180px] relative">
+                  <motion.h2
+                    initial={{ opacity: 0, x: -10 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.4 }}
+                    className="text-[40px] sm:text-[48px] md:text-[64px] leading-[1.1] md:leading-[72px] font-poppins font-semibold text-[#ECEDEE]"
+                  >
+                    {journeyData[activeIndex].year}
+                  </motion.h2>
 
-            <motion.div variants={fadeUp(0.4)} initial="hidden" whileInView="show" className="flex flex-col md:flex-row items-start gap-5 sm:gap-6 md:gap-8">
-              <div className="w-full md:w-[180px]">
-                <h2 className="text-[40px] sm:text-[48px] md:text-[64px] leading-[1.1] md:leading-[72px] font-poppins font-semibold text-[#ECEDEE]">
-                  2022
-                </h2>
-              </div>
-              <div className="flex-grow">
-                <p className="text-base md:text-[20px] text-[#ECEDEE] font-poppins leading-relaxed">
-                  We advanced to agile development, building data-intensive
-                  applications and reducing deployment time from weeks to days.
-                </p>
-              </div>
-            </motion.div>
+                  {/* Faint Next Year */}
+                  <motion.h3
+                    key={journeyData[nextIndex].year}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 0.15, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.3 }}
+                    className="mt-6 text-base font-poppins leading-relaxed text-[40px] sm:text-[48px] md:text-[64px] font-poppins font-semibold text-[#ECEDEE] select-none pointer-events-none"
+                  >
+                    {journeyData[nextIndex].year}
+                  </motion.h3>
+                </div>
+
+                {/* Description for both */}
+                <div className="flex-grow">
+                  {/* Active Year Text */}
+                  <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.2, duration: 0.6 }}
+                    className="text-base md:text-[20px] text-[#ECEDEE] font-poppins leading-relaxed"
+                  >
+                    {journeyData[activeIndex].text}
+                  </motion.p>
+
+                  {/* Faint Next Year Text */}
+                  <motion.p
+                    key={journeyData[nextIndex].text}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 0.2, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.3 }}
+                    className="mt-14 text-base md:text-[18px] text-[#ECEDEE] font-poppins leading-relaxed select-none"
+                  >
+                    {journeyData[nextIndex].text}
+                  </motion.p>
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </div>
         </motion.div>
       </div>
@@ -629,7 +830,7 @@ export default function Company() {
         </motion.h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 justify-items-center relative z-10">
-          {cards.map((card, i) => (
+          {cards1.map((card, i) => (
             <motion.div
               key={i}
               variants={fadeUp(i * 0.15)}
@@ -702,140 +903,64 @@ export default function Company() {
         </motion.div>
       </section>
 
+      {/* {=================Services we offer====================} */}
+      <ServicesCarousel />
+
       {/* ===================== WHAT WE DO ===================== */}
-      <section className="relative py-20 px-6 sm:px-10 lg:px-20">
-        <motion.h2
-          variants={fadeUp(0)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          className="text-4xl md:text-5xl font-bold text-left mb-12"
-        >
-          <motion.span
-            initial={{ backgroundPosition: "0% 50%" }}
-            animate={{ backgroundPosition: "100% 50%" }}
-            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-            className="bg-gradient-to-r from-purple-400 to-blue-400 bg-[length:200%_200%] bg-clip-text text-transparent"
-          >
-            What
-          </motion.span>{" "}
-          <span className="text-white">We Do</span>
-        </motion.h2>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
-          {[
-            { img: techImg, title: "TECHNOLOGY SOLUTION", text: "We create innovative digital tools to help businesses grow." },
-            { img: businessImg, title: "BUSINESS TRANSFORMATION", text: "We turn data into insights for smarter decision-making." },
-            { img: consultingImg, title: "CONSULTING SERVICES", text: "We provide strategies that boost efficiency and success." },
-          ].map((card, i) => (
-            <motion.div
-              key={i}
-              variants={fadeUp(i * 0.2)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.03, y: -6, transition: { duration: 0.4, ease: "easeOut" } }}
-              className="relative w-full max-w-[416px] h-[480px] sm:h-[520px] rounded-lg overflow-hidden group shadow-lg transition-all duration-500"
-            >
-              <motion.img
-                src={card.img}
-                alt={card.title}
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-                whileHover={{ scale: 1.1 }}
-                transition={{ duration: 0.8 }}
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/50 to-transparent" />
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileHover={{ opacity: 0.2 }}
-                transition={{ duration: 0.4 }}
-                className="absolute inset-0 bg-black/50 group-hover:bg-black/60"
-              />
-              <div className="absolute bottom-0 p-6 sm:p-8 text-white">
-                <motion.h3
-                  className="font-poppins font-semibold text-[20px] sm:text-[22px] leading-[30px] mb-2"
-                  whileHover={{ color: "#8B7BFF" }}
-                  transition={{ duration: 0.3 }}
-                >
-                  {card.title}
-                </motion.h3>
-                <motion.p
-                  className="text-[15px] sm:text-[16px] leading-[24px] text-[#DADBDD] mb-6"
-                  whileInView={{ opacity: [0, 1], x: [20, 0] }}
-                  transition={{ duration: 0.6, delay: i * 0.1 }}
-                >
-                  {card.text}
-                </motion.p>
-                <motion.div whileHover={{ x: 6 }} transition={{ duration: 0.3 }} className="flex items-center gap-2 cursor-pointer group">
-                  <span className="text-[16px] text-white/90 group-hover:text-white">Learn more</span>
-                  <div className="relative w-[56px] h-[56px] -ml-3 transition-transform duration-300 group-hover:rotate-6">
-                    <img src={Ellipse} alt="ellipse" className="w-full h-full transition-all duration-500 group-hover:opacity-80" />
-                    <span className="absolute inset-0 flex items-center justify-center text-white text-xl -ml-3">
-                      <img src={narrow} alt="arrow" className="w-[11.5px] h-[20px]" />
-                    </span>
-                  </div>
-                </motion.div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        <div className="flex justify-end gap-4 mt-12 pr-2 sm:pr-6 lg:pr-0">
-          <motion.div
-            whileHover={{ scale: 1.1, backgroundColor: "#374151" }}
-            transition={{ duration: 0.3 }}
-            className="w-[60px] sm:w-[70px] h-[60px] sm:h-[70px] rounded-full border border-gray-400 flex items-center justify-center cursor-pointer"
-          >
-            <span className="text-[28px] sm:text-[30px] leading-[19px] text-gray-300">←</span>
-          </motion.div>
-          <motion.div
-            whileHover={{ scale: 1.1, backgroundColor: "#EF4444" }}
-            transition={{ duration: 0.3 }}
-            className="w-[60px] sm:w-[70px] h-[60px] sm:h-[70px] rounded-full border border-red-500 flex items-center justify-center cursor-pointer"
-          >
-            <span className="text-[28px] sm:text-[30px] leading-[19px] text-white">→</span>
-          </motion.div>
-        </div>
-      </section>
+      <WhatWeDoSection />
 
       {/* ===================== TOOLS ===================== */}
       <motion.section
-        className="w-full py-16 md:py-20 px-4 sm:px-8 lg:px-20"
+        className="w-full bg-black text-white py-16 px-6 md:px-12"
         variants={fadeUp(0.05)}
         initial="hidden"
-        whileInView="visible"
+        whileInView="show"
         viewport={{ once: true }}
       >
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 items-start">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
           <div>
-            <GradientHeading className="text-3xl md:text-5xl leading-tight">
-              Built With the Right Tools for the Job
-            </GradientHeading>
-            <p className="text-gray-400 text-base md:text-lg mt-6">
-              We use cutting-edge platforms and frameworks to ensure top performance.
+            <h2 className="text-[32px] md:text-[40px] lg:text-[48px] font-extrabold mb-6 leading-tight">
+              <span className="bg-[radial-gradient(425.56%_425.56%_at_50%_50%,_#8076F4_0%,_#FFFFFF_9.96%)] text-transparent bg-clip-text">
+                Built With the Right Tools for the Job
+              </span>
+            </h2>
+            <p className="text-gray-400 text-base md:text-[20px] mb-8">
+              We use cutting-edge frameworks and platforms to ensure top performance.
             </p>
-            <div className="mt-8">
-              <CTAButton label="Get Started" />
-            </div>
+            <a
+              href="#"
+              className="inline-flex items-center gap-2 text-white font-medium group rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A49CFD]/60"
+              style={{ fontSize: "16px" }}
+            >
+              Get Started
+              <span className="relative w-[56px] h-[56px] -ml-4 inline-flex items-center justify-center">
+                <img src={Ellipse} alt="" className="w-full h-full" />
+                <img
+                  src={narrow}
+                  alt=""
+                  className="absolute w-[11.5px] h-5 transition-transform duration-300 group-hover:translate-x-0.5"
+                />
+              </span>
+            </a>
           </div>
 
           <motion.div
             className="hidden md:flex justify-center items-center"
-            variants={{ hidden: { opacity: 0, scale: 0.94 }, visible: { opacity: 1, scale: 1, transition: { duration: 0.6 } } }}
+            variants={pop(0.1)}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
           >
-            <img src={reverseArrow} alt="" className="w-28 h-24 opacity-80" />
+            <img src={reverseArrow} alt="Arrow Illustration" className="w-[150px] h-[130px]" />
           </motion.div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-            <ToolBadge logo={group136} label="Databricks" imgClass="w-[120px] h-auto" />
-            <ToolBadge logo={vector3} label="Cloudera" imgClass="w-[120px] h-auto" />
-            <ToolBadge logo={group137} label="SAP" imgClass="w-[64px] h-auto" />
-            <ToolBadge logo={vector4} label="OpenText" imgClass="w-[54px] h-auto" />
-            <ToolBadge logo={group138} label="Dynatrace" imgClass="w-[120px] h-auto" />
-            <ToolBadge logo={group134} label="AWS" imgClass="w-[110px] h-auto" />
+            <LogoCard logo={group136} label="Databricks" />
+            <LogoCard logo={vector3} label="Cloudera" />
+            <LogoCard logo={group137} label="SAP" small />
+            <LogoCard logo={vector4} label="OpenText" tiny />
+            <LogoCard logo={group138} label="Dynatrace" />
+            <LogoCard logo={group134} label="AWS" />
           </div>
         </div>
       </motion.section>
@@ -849,132 +974,18 @@ export default function Company() {
       </div>
 
       {/* ===================== AWARDS ===================== */}
-      <section className="relative w-full py-20 px-6 sm:px-10 lg:px-20 mx-auto text-white overflow-hidden">
-        <motion.div variants={fadeUp(0)} initial="hidden" whileInView="show" viewport={{ once: true }} className="mx-auto ml-0 sm:ml-8 md:ml-16">
-          <div className="text-left mb-10 md:mb-16">
-            <h2
-              className="font-poppins font-semibold text-[36px] sm:text-[44px] md:text-[48px] leading-[1.15]
-                         bg-[radial-gradient(425.56%_425.56%_at_50%_50%,_#8076F4_0%,_#FFFFFF_9.96%)]
-                         text-transparent bg-clip-text"
-            >
-              Awards and Recognition
-            </h2>
-          </div>
-        </motion.div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
-          {awards.map((award, i) => (
-            <motion.div
-              key={i}
-              variants={fadeUp(i * 0.15)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05, y: -8, boxShadow: "0 8px 30px rgba(128,118,244,0.25)", transition: { duration: 0.4, ease: "easeOut" } }}
-              className="relative w-full max-w-[400px] h-[220px] sm:h-[250px] rounded-lg overflow-hidden transition-all duration-300"
-            >
-              <motion.img
-                src={award.img}
-                alt={award.alt}
-                className="object-contain w-full h-full p-6 transition-transform duration-700 ease-out group-hover:scale-105"
-                whileHover={{ scale: 1.1 }}
-                transition={{ duration: 0.6 }}
-              />
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileHover={{ opacity: 0.15 }}
-                transition={{ duration: 0.4 }}
-                className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent rounded-lg"
-              />
-            </motion.div>
-          ))}
-        </div>
-
-        <div className="flex justify-end gap-4 mt-12 mr-0 sm:mr-6 lg:mr-14">
-          <motion.div whileHover={{ scale: 1.1, backgroundColor: "#374151", transition: { duration: 0.3 } }} className="w-[56px] sm:w-[60px] h-[56px] sm:h-[60px] rounded-full border border-gray-400 flex items-center justify-center cursor-pointer">
-            <span className="text-[26px] sm:text-[28px] leading-[19px] text-gray-300">←</span>
-          </motion.div>
-          <motion.div whileHover={{ scale: 1.1, backgroundColor: "#EF4444", transition: { duration: 0.3 } }} className="w-[56px] sm:w-[60px] h-[56px] sm:h-[60px] rounded-full border border-red-500 flex items-center justify-center cursor-pointer">
-            <span className="text-[26px] sm:text-[28px] leading-[19px] text-white">→</span>
-          </motion.div>
-        </div>
-      </section>
+      <AwardsSection />
 
       {/* ===================== RELATED INSIGHTS ===================== */}
-      <motion.section
-        className="w-full bg-black text-white py-16 md:py-20 px-4 sm:px-6 md:px-12 mx-auto max-w-[1380px]"
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.25 }}
-        transition={{ duration: 0.8 }}
-      >
-        <div className="text-left mb-8 md:mb-12">
-          <h2
-            className="font-poppins font-semibold text-[32px] sm:text-[40px] md:text-[48px] leading-[1.15]
-                       bg-[radial-gradient(425.56%_425.56%_at_50%_50%,_#8076F4_0%,_#FFFFFF_9.96%)]
-                       text-transparent bg-clip-text"
-          >
-            Related Insights
-          </h2>
-        </div>
-
-        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {[
-            { img: MindfulChef, title: "INDUSTRY TRENDS", desc: "We share insights on emerging trends shaping the future of business and technology." },
-            { img: Thursday, title: "CASE STUDIES", desc: "We highlight real success stories that showcase our impact and expertise." },
-            { img: Gener8, title: "RESEARCH REPORT", desc: "We provide in-depth analysis to guide smarter strategies and decisions." },
-          ].map((card, i) => (
-            <motion.div
-              key={i}
-              className="w-full max-w-[416px] mx-auto bg-[#22252B] border-b-4 border-[#DADBDD] rounded-[4px] overflow-hidden flex flex-col justify-between shadow-md transition-all duration-300 hover:shadow-[0_0_15px_rgba(169,92,236,0.3)]"
-              variants={fadeUp(i * 0.15)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.2 }}
-              whileHover={{ y: -4 }}
-            >
-              <img src={card.img} alt={card.title} className="w-full h-[220px] sm:h-[260px] lg:h-[300px] object-cover" />
-              <div className="flex flex-col justify-between flex-grow px-5 sm:px-6 py-5 sm:py-6">
-                <div>
-                  <h3 className="text-[18px] sm:text-[20px] font-semibold mb-2 sm:mb-3 text-[#ECEDEE]">{card.title}</h3>
-                  <p className="text-[#A0A0A0] text-[14px] sm:text-[15px] leading-relaxed">{card.desc}</p>
-                </div>
-                <div className="flex justify-end items-end">
-                  <button className="mt-5 sm:mt-6 flex items-center text-[#ECEDEE] text-[14px] sm:text-[15px] font-medium hover:text-[#E50000] transition group">
-                    <span>Learn more</span>
-                    <div className="relative w-[48px] sm:w-[56px] h-[48px] sm:h-[56px] flex items-center justify-center ml-1 sm:ml-2">
-                      <img src={Ellipse} alt="ellipse" className="w-full h-full" />
-                      <img src={narrow} alt="arrow" className="absolute w-[10px] sm:w-[11.5px] h-[18px] sm:h-[20px] transition-transform duration-300 group-hover:translate-x-1" />
-                    </div>
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        <motion.div
-          className="flex justify-end mt-10 md:mt-12 space-x-4"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-        >
-          <button
-            className="w-[44px] h-[44px] sm:w-[48px] sm:h-[48px] border border-[#E50000] rounded-full flex items-center justify-center hover:bg-[#E50000] transition duration-300 group"
-            aria-label="Previous"
-          >
-            <span className="inline-block text-[#E50000] text-lg sm:text-xl group-hover:text-white w-4 h-6 leading-none">‹</span>
-          </button>
-          <button
-            className="w-[44px] h-[44px] sm:w-[48px] sm:h-[48px] border border-[#E50000] rounded-full flex items-center justify-center hover:bg-[#E50000] transition duration-300 group"
-            aria-label="Next"
-          >
-            <span className="text-[#E50000] text-lg sm:text-xl group-hover:text-white">›</span>
-          </button>
-        </motion.div>
-      </motion.section>
-
+      <InsightSection title="Related Insights" cards={cards} />
+      {/* {==============Stay Connected===============} */}
+      <div className="relative">
+        <img
+          src={decoImg2}
+          alt="Decoration"
+          className="absolute right-10 -top-14 w-[110px] md:w-[240px] md:h-[426px] object-contain drop-shadow-[0_0_20px_rgba(168,85,247,0.7)]"
+        />
+      </div>
       {/* ===================== STAY CONNECTED ===================== */}
       <section className="px-4 sm:px-6 lg:px-20 py-16 md:py-20 text-white overflow-hidden">
         <div className="text-left mb-8 md:mb-12">
@@ -1105,6 +1116,36 @@ export default function Company() {
           </div>
         </div>
       </section>
+    </div>
+  );
+}
+
+
+function LogoCard({
+  logo,
+  label,
+  small,
+  tiny,
+}: {
+  logo: string;
+  label: string;
+  small?: boolean;
+  tiny?: boolean;
+}) {
+  return (
+    <div
+      className="bg-[#111215] rounded-lg px-6 py-6 flex flex-col items-center justify-center border border-transparent
+                 transition-all duration-300 hover:border-[#A49CFD]/40 hover:shadow-[0_0_24px_rgba(164,156,253,0.08)] hover:-translate-y-1 group"
+    >
+      <img
+        src={logo}
+        alt={label}
+        className={`object-contain transition duration-300 grayscale group-hover:grayscale-0 ${tiny ? "w-[48px]" : small ? "w-[64px]" : "w-[120px]"
+          }`}
+      />
+      <p className="text-white text-sm md:text-base mt-4 whitespace-nowrap opacity-80 group-hover:opacity-100">
+        {label}
+      </p>
     </div>
   );
 }

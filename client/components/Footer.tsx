@@ -6,6 +6,7 @@ import svg83 from "../svg/Frame 83.svg";
 import svg84 from "../svg/Frame 84.svg";
 import svg85 from "../svg/Frame 85.svg";
 import svg86 from "../svg/Frame 86.svg";
+import logo from '../Images/logo.png'
 
 export default function Footer() {
   return (
@@ -13,13 +14,22 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Description */}
-          <div className="md:col-span-1" style={{ marginTop: '125px' }}>
+          <div className="md:col-span-1 flex flex-col items-start">
+            {/* Logo */}
+            <img
+              src={logo}
+              alt="HPIT Logo"
+              className="w-[227.47px] h-[86.7px] opacity-100 object-contain mb-4"
+            />
+
+            {/* Text */}
             <p className="text-gray-300 text-[16px] leading-relaxed">
               Top IT Consulting Delivering
               <br />
               Custom Innovation Solutions
             </p>
           </div>
+
 
           {/* About us */}
           <div>

@@ -310,9 +310,9 @@ export default function DigitalWorkplace() {
               >
                 <img src={service.img} alt={service.title} className="w-full h-[240px] sm:h-[250px] object-cover" />
 
-                <div
-                  className={`absolute bottom-0 left-0 right-0 h-[45%] bg-gradient-to-b ${service.gradient} from-black/80 via-black/40 to-transparent opacity-40`}
-                />
+                 <div
+                  className={`absolute bottom-0 left-0 right-0 h-[45%] z-10 bg-gradient-to-b ${service.gradient} from-black/0 via-black/40 opacity-40`}
+                ></div>
 
                 <div className="relative z-10 flex flex-col justify-between flex-grow p-6">
                   <div>
