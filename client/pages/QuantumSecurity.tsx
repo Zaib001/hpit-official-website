@@ -38,6 +38,7 @@ import res3 from "@/Images/QS/res3.png";
 import i1 from "../Images/QS/i1.png";
 import i2 from "../Images/QS/i2.png";
 import i3 from "../Images/QS/i3.png";
+import InsightSection from "@/components/InsightSection";
 
 /* ----------------------------- Animation Helpers ---------------------------- */
 const fadeUp = (delay = 0) => ({
@@ -154,6 +155,29 @@ const InsightCard: React.FC<{ img: string; title: string; desc: string }> = ({ i
   </motion.article>
 );
 
+const cards = [
+  {
+    img: i1,
+    title: "CRYPTOGRAPHY",
+    desc: "Explore encryption methods designed to withstand quantum attacks.",
+  },
+  {
+    img: i2,
+    title: "FUTURE-READY SECURITY",
+    desc: "Learn how quantum-safe strategies protect long-term digital assets.",
+  },
+  {
+    img: i3,
+    title: "RISK MITIGATION",
+    desc: "See how early adoption reduces vulnerabilities in the quantum era.",
+  },
+   {
+    img: i2,
+    title: "FUTURE-READY SECURITY",
+    desc: "Learn how quantum-safe strategies protect long-term digital assets.",
+  },
+];
+
 /* --------------------------------- Page ---------------------------------- */
 export default function Quantumsecurity() {
   return (
@@ -202,7 +226,7 @@ export default function Quantumsecurity() {
                   <br /> Tomorrow
                 </motion.p>
 
-              
+
               </div>
             </div>
           </div>
@@ -435,145 +459,78 @@ export default function Quantumsecurity() {
       </motion.section>
 
       {/* --------------------------- PROTECTION BLOCK ------------------------ */}
-     {/* Protection Section (responsive, desktop unchanged) */}
-<FadeInSection delay={0.5}>
-  <div className="bg-black text-white px-6 sm:px-16 py-20 relative">
-    <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-start lg:items-center relative">
-      <div>
-        <h2 className="text-3xl sm:text-[48px] font-extrabold leading-tight text-transparent bg-clip-text bg-[radial-gradient(425.56%_425.56%_at_50%_50%,#8076F4_0%,#FFFFFF_9.96%)]">
-          Protection That Endures Quantum Change
-        </h2>
-        <p className="text-gray-300 text-[18px] mt-6 max-w-lg leading-relaxed">
-          Transitioning to quantum safe security isn’t just about staying
-          ahead it’s about protecting what matters most. HPIT’s approach
-          ensures your organization is equipped for the next era of
-          cybersecurity without disrupting current operations.
-        </p>
-      </div>
+      {/* Protection Section (responsive, desktop unchanged) */}
+      <FadeInSection delay={0.5}>
+        <div className="bg-black text-white px-6 sm:px-16 py-20 relative">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-start lg:items-center relative">
+            <div>
+              <h2 className="text-3xl sm:text-[48px] font-extrabold leading-tight text-transparent bg-clip-text bg-[radial-gradient(425.56%_425.56%_at_50%_50%,#8076F4_0%,#FFFFFF_9.96%)]">
+                Protection That Endures Quantum Change
+              </h2>
+              <p className="text-gray-300 text-[18px] mt-6 max-w-lg leading-relaxed">
+                Transitioning to quantum safe security isn’t just about staying
+                ahead it’s about protecting what matters most. HPIT’s approach
+                ensures your organization is equipped for the next era of
+                cybersecurity without disrupting current operations.
+              </p>
+            </div>
 
-      {/* Cards grid: 1-col on mobile, 2-col from sm+, same fixed sizes on lg+ */}
-      <motion.div
-        className="grid grid-cols-1 sm:grid-cols-2 gap-6"
-        style={{ marginTop: "60px" }}
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-      >
-        <div className="w-full lg:w-[296px] min-h-[160px] lg:h-[183px] bg-black rounded-[8px] border border-dotted border-[#444955] p-6 flex items-center justify-center hover:border-[#6C40D6] transition">
-          <p className="text-[16px] lg:text-[18px] text-gray-300 text-center lg:text-left">
-            Protect mission-critical data from quantum-era breaches
-          </p>
+            {/* Cards grid: 1-col on mobile, 2-col from sm+, same fixed sizes on lg+ */}
+            <motion.div
+              className="grid grid-cols-1 sm:grid-cols-2 gap-6"
+              style={{ marginTop: "60px" }}
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="w-full lg:w-[296px] min-h-[160px] lg:h-[183px] bg-black rounded-[8px] border border-dotted border-[#444955] p-6 flex items-center justify-center hover:border-[#6C40D6] transition">
+                <p className="text-[16px] lg:text-[18px] text-gray-300 text-center lg:text-left">
+                  Protect mission-critical data from quantum-era breaches
+                </p>
+              </div>
+
+              <div className="w-full lg:w-[296px] min-h-[160px] lg:h-[183px] bg-[#6C40D6] rounded-[8px] p-6 flex items-center justify-center hover:brightness-110 transition">
+                <p className="text-[16px] lg:text-[18px] text-white text-center lg:text-left">
+                  Achieve Regulatory Compliance and Audit Readiness
+                </p>
+              </div>
+
+              <div className="w-full lg:w-[296px] min-h-[160px] lg:h-[183px] bg-[#2DA67C] rounded-[8px] p-6 flex items-center justify-center hover:brightness-110 transition">
+                <p className="text-[16px] lg:text-[18px] text-white text-center lg:text-left">
+                  Avoid emergency transitions and operational delays
+                </p>
+              </div>
+
+              <div className="w-full lg:w-[296px] min-h-[160px] lg:h-[183px] bg-black rounded-[8px] border border-dotted border-[#444955] p-6 flex items-center justify-center hover:border-[#2DA67C] transition">
+                <p className="text-[16px] lg:text-[18px] text-gray-300 text-center lg:text-left">
+                  Enhance stakeholder trust through proactive resilience
+                </p>
+              </div>
+            </motion.div>
+
+            {/* Arrow: keep exact position on desktop, hide on small screens */}
+            <motion.img
+              src={reverseArrow}
+              alt="Middle Arrow"
+              className="hidden lg:block absolute w-[79.6px] h-[69px] top-[150px] left-[450px]"
+              style={{ marginTop: "90px", marginLeft: "80px" }}
+              initial={{ opacity: 0, rotate: -45 }}
+              whileInView={{ opacity: 1, rotate: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            />
+          </div>
         </div>
-
-        <div className="w-full lg:w-[296px] min-h-[160px] lg:h-[183px] bg-[#6C40D6] rounded-[8px] p-6 flex items-center justify-center hover:brightness-110 transition">
-          <p className="text-[16px] lg:text-[18px] text-white text-center lg:text-left">
-            Achieve Regulatory Compliance and Audit Readiness
-          </p>
-        </div>
-
-        <div className="w-full lg:w-[296px] min-h-[160px] lg:h-[183px] bg-[#2DA67C] rounded-[8px] p-6 flex items-center justify-center hover:brightness-110 transition">
-          <p className="text-[16px] lg:text-[18px] text-white text-center lg:text-left">
-            Avoid emergency transitions and operational delays
-          </p>
-        </div>
-
-        <div className="w-full lg:w-[296px] min-h-[160px] lg:h-[183px] bg-black rounded-[8px] border border-dotted border-[#444955] p-6 flex items-center justify-center hover:border-[#2DA67C] transition">
-          <p className="text-[16px] lg:text-[18px] text-gray-300 text-center lg:text-left">
-            Enhance stakeholder trust through proactive resilience
-          </p>
-        </div>
-      </motion.div>
-
-      {/* Arrow: keep exact position on desktop, hide on small screens */}
-      <motion.img
-        src={reverseArrow}
-        alt="Middle Arrow"
-        className="hidden lg:block absolute w-[79.6px] h-[69px] top-[150px] left-[450px]"
-        style={{ marginTop: "90px", marginLeft: "80px" }}
-        initial={{ opacity: 0, rotate: -45 }}
-        whileInView={{ opacity: 1, rotate: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-      />
-    </div>
-  </div>
-</FadeInSection>
+      </FadeInSection>
 
 
       {/* ---------------------------- RELATED INSIGHTS ----------------------- */}
-       <motion.section
-        className="w-full bg-black text-white py-20 px-6 md:px-12 mx-auto max-w-[1350px]"
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-      >
-        <div className="text-left mb-12 w-[400px] h-[34px] opacity-100">
-          <h2
-            className="font-poppins font-semibold text-[48px] leading-[56px] tracking-[0]
-            bg-[radial-gradient(425.56%_425.56%_at_50%_50%,_#8076F4_0%,_#FFFFFF_9.96%)]
-            text-transparent bg-clip-text"
-          >
-            Related Insights
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 ">
-          {[
-            { img: i1, title: "CRYPTOGRAPHY", desc: "Explore encryption methods designed to withstand quantum attacks." },
-            { img: i2, title: "FUTURE-READY SECURITY", desc: "Learn how quantum-safe strategies protect long-term digital assets." },
-            { img: i3, title: "RISK MITIGATION", desc: "See how early adoption reduces vulnerabilities in the quantum era." },
-          ].map((card, i) => (
-            <motion.div
-              key={i}
-              className="w-full md:w-[400px] h-auto md:h-[556px] bg-[#22252B] border-b-4 border-[#DADBDD] rounded-[4px] overflow-hidden flex flex-col justify-between shadow-md hover:shadow-[0_0_15px_rgba(169,92,236,0.3)] transition-all duration-300 mx-auto"
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.2 }}
-              whileHover={{ y: -6 }}
-            >
-              <img src={card.img} alt={card.title} className="w-full h-[300px] object-cover" />
-              <div className="flex flex-col justify-between flex-grow px-6 py-6">
-                <div>
-                  <h3 className="text-[20px] font-semibold mb-3 text-[#ECEDEE]">{card.title}</h3>
-                  <p className="text-[#A0A0A0] text-[15px] leading-relaxed">{card.desc}</p>
-                </div>
-                <div className="flex justify-end items-end">
-                  <button className="mt-6 flex items-center text-[#ECEDEE] text-[15px] font-medium hover:text-[#E50000] transition">
-                    <span>Learn more</span>
-                    <div className="relative w-[56px] h-[56px] flex items-center justify-center">
-                      <img src={Ellipse} alt="ellipse" className="w-full h-full" />
-                      <img
-                        src={narrow}
-                        alt="arrow"
-                        className="absolute w-[11.5px] h-[20px] transition-transform duration-300 hover:translate-x-0.5"
-                      />
-                    </div>
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Navigation Arrows (same) */}
-        <motion.div
-          className="flex justify-end mt-12 space-x-4"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-        >
-          <button className="w-[48px] h-[48px] border border-[#E50000] rounded-full flex items-center justify-center hover:bg-[#E50000] transition duration-300 group">
-            <span className="inline-block text-[#E50000] text-xl group-hover:text-white w-4 h-6 leading-none">‹</span>
-          </button>
-          <button className="w-[48px] h-[48px] border border-[#E50000] rounded-full flex items-center justify-center hover:bg-[#E50000] transition duration-300 group">
-            <span className="text-[#E50000] text-xl group-hover:text-white">›</span>
-          </button>
-        </motion.div>
-      </motion.section>
+      <InsightSection
+        title="Related Insights"
+        cards={cards}
+        autoSlideInterval={6000}
+      />
 
       {/* -------------------------------- RESOURCES -------------------------- */}
       <section className="bg-black">

@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect } from "react";
-import { motion, useAnimation,useInView } from "framer-motion";
+import { motion, useAnimation, useInView } from "framer-motion";
 
 import wams_img from "./images/wams-img1.png";
 import ws from "./svg/Wireless and.svg";
@@ -43,6 +43,7 @@ import i3 from "../Images/wireless/i3.png";
 import wifi from "../Images/wireless/w30.png";
 import res1 from "../Images/wireless/r1.png";
 import res2 from "../Images/wireless/r2.png";
+import InsightSection from "@/components/InsightSection";
 
 export default function WirelessAndMobilityServices() {
     // Reusable animation helpers
@@ -60,91 +61,38 @@ export default function WirelessAndMobilityServices() {
         viewport: { once: true, amount: 0.2 },
     });
 
-    const Card = ({ title, description }) => {
-        const words = title.trim().split(" ");
-        const length = words.length;
 
-        const firstLine = words.slice(0, length - 1).join(" ");
-        const lastWord = words[length - 1];
-
-        return (
-            <motion.div
-                className="w-full max-w-[380px] sm:max-w-none h-auto min-h-[240px] rounded-md border border-[#444955] bg-[#111215] relative"
-                style={{
-                    borderWidth: "1.5px",
-                    borderStyle: "dashed",
-                    paddingTop: "40px",
-                    paddingLeft: "24px",
-                    paddingRight: "24px",
-                    paddingBottom: "24px",
-                }}
-                {...fadeUp(0)}
-                whileHover={{ scale: 1.03, boxShadow: "0 14px 40px rgba(0,0,0,0.35)" }}
-            >
-                <h3 className="text-[24px] font-semibold mb-[30px] leading-snug">
-                    {firstLine && (
-                        <>
-                            {firstLine}
-                            <br />
-                        </>
-                    )}
-                    {lastWord}
-                </h3>
-                <p className="text-gray-400 text-[16px] leading-relaxed">{description}</p>
-            </motion.div>
-        );
-    };
 
     const pop = (delay = 0) => ({
         hidden: { opacity: 0, scale: 0.96 },
         visible: { opacity: 1, scale: 1, transition: { duration: 0.6, delay } },
     });
 
-   
+    const cards = [
+        {
+            img: i1,
+            title: "UNIFIED CONNECTIVITY",
+            desc: "Delivering seamless access across devices and networks.",
+        },
+        {
+            img: i2,
+            title: "SECURE MOBILITY",
+            desc: "Protecting data while enabling flexible mobile operations.",
+        },
+        {
+            img: i3,
+            title: "SCALABLE NETWORKS",
+            desc: "Expanding wireless infrastructure to support growing demands.",
+        },
+          {
+            img: i2,
+            title: "SECURE MOBILITY",
+            desc: "Protecting data while enabling flexible mobile operations.",
+        },
+    ];
 
-    // Card for capabilities (keeps your dashed look, adds subtle hover + focus)
-    const CapabilityCard: React.FC<{ title: string; description: string }> = ({
-        title,
-        description,
-    }) => {
-        const words = title.trim().split(" ");
-        const firstLine = words.slice(0, -1).join(" ");
-        const lastWord = words[words.length - 1];
-        return (
-            <motion.div
-                className="w-full max-w-[380px] h-[240px] rounded-md border border-[#444955] bg-[#111215] relative focus-within:ring-2 focus-within:ring-[#A49CFD]/50"
-                style={{
-                    borderWidth: "1.5px",
-                    borderStyle: "dashed",
-                    paddingTop: "40px",
-                    paddingLeft: "24px",
-                    paddingRight: "24px",
-                    paddingBottom: "24px",
-                }}
-                variants={pop(0.06)}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                whileHover={{
-                    translateY: -4,
-                    boxShadow: "0px 14px 40px rgba(0,0,0,0.35)",
-                }}
-                transition={{ duration: 0.35 }}
-                tabIndex={0}
-            >
-                <h3 className="text-[24px] font-semibold mb-[30px] leading-snug">
-                    {firstLine && (
-                        <>
-                            {firstLine}
-                            <br />
-                        </>
-                    )}
-                    {lastWord}
-                </h3>
-                <p className="text-gray-400 text-[16px] leading-relaxed">{description}</p>
-            </motion.div>
-        );
-    };
+
+
 
     return (
         <div className="min-h-screen flex flex-col bg-black gap-y-28">
@@ -578,98 +526,11 @@ export default function WirelessAndMobilityServices() {
                 </div>
             </motion.section>
 
-            <motion.section
-                className="w-full bg-black text-white py-20 px-6 md:px-12 mx-auto max-w-[1350px]"
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8 }}
-            >
-                {/* Heading */}
-                <div className="text-left mb-12">
-                    <h2
-                        className="font-poppins font-semibold text-[36px] sm:text-[44px] md:text-[48px] leading-[1.15]
-            bg-[radial-gradient(425.56%_425.56%_at_50%_50%,_#8076F4_0%,_#FFFFFF_9.96%)]
-            text-transparent bg-clip-text"
-                    >
-                        Related Insights
-                    </h2>
-                </div>
-
-                {/* Cards */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr">
-                    {[
-                        {
-                            img: i1,
-                            title: "UNIFIED CONNECTIVITY",
-                            desc: "Delivering seamless access across devices and networks.",
-                        },
-                        {
-                            img: i2,
-                            title: "SECURE MOBILITY",
-                            desc: "Protecting data while enabling flexible mobile operations.",
-                        },
-                        {
-                            img: i3,
-                            title: "SCALABLE NETWORKS",
-                            desc: "WExpanding wireless infrastructure to support growing demands.",
-                        },
-                    ].map((card, i) => (
-                        <motion.div
-                            key={i}
-                            className="w-full bg-[#22252B] border-b-4 border-[#DADBDD] rounded-[4px] overflow-hidden flex flex-col justify-between shadow-md transition-all duration-300"
-                            initial={{ opacity: 0, y: 40 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6, delay: i * 0.2 }}
-                            whileHover={{ y: -4, boxShadow: "0 0 15px rgba(169,92,236,0.3)" }}
-                        >
-                            {/* Image */}
-                            <img src={card.img} alt={card.title} className="w-full h-[240px] sm:h-[300px] object-cover" />
-
-                            {/* Content */}
-                            <div className="flex flex-col justify-between flex-grow px-6 py-6">
-                                <div>
-                                    <h3 className="text-[18px] sm:text-[20px] font-semibold mb-3 text-[#ECEDEE]">
-                                        {card.title}
-                                    </h3>
-                                    <p className="text-[#A0A0A0] text-[15px] leading-relaxed">{card.desc}</p>
-                                </div>
-
-                                {/* Learn More Button */}
-                                <div className="flex justify-end items-end">
-                                    <button className="mt-6 flex items-center text-[#ECEDEE] text-[15px] font-medium hover:text-[#E50000] transition">
-                                        <span>Learn more</span>
-                                        <div className="relative w-[56px] h-[56px] flex items-center justify-center">
-                                            <img src={Ellipse} alt="ellipse" className="w-full h-full" />
-                                            <img src={narrow} alt="arrow" className="absolute w-[11.5px] h-[20px]" />
-                                        </div>
-                                    </button>
-                                </div>
-                            </div>
-                        </motion.div>
-                    ))}
-                </div>
-
-                {/* Navigation Arrows */}
-                <motion.div
-                    className="flex justify-end mt-12 space-x-4"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.5 }}
-                >
-                    <button className="w-[48px] h-[48px] border border-[#E50000] rounded-full flex items-center justify-center hover:bg-[#E50000] transition duration-300 group">
-                        <span className="inline-block text-[#E50000] text-xl group-hover:text-white w-4 h-6 leading-none">
-                            ‹
-                        </span>
-                    </button>
-
-                    <button className="w-[48px] h-[48px] border border-[#E50000] rounded-full flex items-center justify-center hover:bg-[#E50000] transition duration-300 group">
-                        <span className="text-[#E50000] text-xl group-hover:text-white">›</span>
-                    </button>
-                </motion.div>
-            </motion.section>
+            <InsightSection
+                title="Related Insights"
+                cards={cards}
+                autoSlideInterval={6000}
+            />
 
             <section className="bg-black text-white mx-auto">
                 <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-0 py-10">

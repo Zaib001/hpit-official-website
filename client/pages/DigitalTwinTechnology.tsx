@@ -34,6 +34,7 @@ import res3 from "@/Images/DGT/res3.png";
 import i1 from "../Images/DGT/i1.png";
 import i2 from "../Images/DGT/i2.png";
 import i3 from "../Images/DGT/i3.png";
+import InsightSection from "@/components/InsightSection";
 
 export default function DigitalTwinTechnology() {
   /* ----------------------------- ANIM HELPERS ------------------------------ */
@@ -116,9 +117,8 @@ export default function DigitalTwinTechnology() {
         <img
           src={logo}
           alt={label}
-          className={`object-contain transition duration-300 grayscale group-hover:grayscale-0 ${
-            tiny ? "w-[48px]" : small ? "w-[64px]" : "w-[120px]"
-          }`}
+          className={`object-contain transition duration-300 grayscale group-hover:grayscale-0 ${tiny ? "w-[48px]" : small ? "w-[64px]" : "w-[120px]"
+            }`}
         />
         <p className="text-white text-sm md:text-base mt-4 whitespace-nowrap opacity-80 group-hover:opacity-100">
           {label}
@@ -126,38 +126,60 @@ export default function DigitalTwinTechnology() {
       </div>
     );
   }
+  const cards = [
+    {
+      img: i1,
+      title: "VIRTUAL PROTOTYPING",
+      desc: "Digital twins enable faster product testing & refinement through accurate virtual models.",
+    },
+    {
+      img: i2,
+      title: "SMART OPERATIONS",
+      desc: "They optimize real-time performance by predicting issues before they occur.",
+    },
+    {
+      img: i3,
+      title: "DATA-DRIVEN INNOVATION",
+      desc: "Insights from digital twins drive continuous improvement and new business models.",
+    },
+     {
+      img: i2,
+      title: "SMART OPERATIONS",
+      desc: "They optimize real-time performance by predicting issues before they occur.",
+    },
+  ];
 
   return (
     <div className="min-h-screen flex flex-col bg-black">
       {/* Hero Section */}
-       <motion.div
-                className="min-h-screen bg-cover bg-center bg-no-repeat relative"
-                style={{
-                    backgroundImage: `url(${digitalImg})`,
-                }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-            >
-                <div className="relative z-10 pt-60 pb-20 px-4 sm:px-6 lg:px-12">
-                    <div className="max-w-7xl mx-auto mt-24">
-                        <div className="max-w-2xl">
-                            <motion.h2 className="text-white text-4xl md:text-[56px] lg:text-6xl font-normal mb-2">
-                                <img
-                                    src={DigitalTwin}
-                                    alt="Company"
-                                />
-                            </motion.h2>
-                            <motion.h2 className="text-white text-3xl md:text-[56px] lg:text-5xl font-bold mb-8" >
-                                Technology
-                            </motion.h2>
-                            <motion.p className="text-white text-base md:text-[20px] leading-relaxed max-w-xl" >
-                                Turning Intelligence Into Impact <br></br> Faster
-                            </motion.p>
-                        </div>
-                    </div>
-                </div>
-            </motion.div>
+      <motion.div
+        className="min-h-screen bg-cover bg-center bg-no-repeat relative"
+        style={{
+          backgroundImage: `url(${digitalImg})`,
+        }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
+        <div className="relative z-10 pt-60 pb-20 px-4 sm:px-6 lg:px-12">
+          <div className="max-w-7xl mx-auto mt-24">
+            <div className="max-w-2xl">
+              <motion.h2 className="text-white text-4xl md:text-[56px] lg:text-6xl font-normal mb-2">
+                <img
+                  src={DigitalTwin}
+                  alt="Company"
+                />
+              </motion.h2>
+              <motion.h2 className="text-white text-3xl md:text-[56px] lg:text-5xl font-bold mb-8" >
+                Technology
+              </motion.h2>
+              <motion.p className="text-white text-base md:text-[20px] leading-relaxed max-w-xl" >
+                Turning Intelligence Into Impact <br></br> Faster
+              </motion.p>
+            </div>
+          </div>
+        </div>
+      </motion.div>
 
       <div className="text-white px-4 sm:px-8 lg:px-20 py-16">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
@@ -588,7 +610,7 @@ export default function DigitalTwinTechnology() {
           {/* Image + Features Section */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
             {/* Left Image */}
-            <motion.div className="w-full"  whileHover={{ scale: 1.01 }}>
+            <motion.div className="w-full" whileHover={{ scale: 1.01 }}>
               <img
                 src={img3}
                 alt="Team discussing security"
@@ -624,104 +646,11 @@ export default function DigitalTwinTechnology() {
         </div>
       </div>
 
-      <motion.section
-        className="w-full bg-black text-white py-20 px-6 md:px-12 mx-auto max-w-[1350px]"
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-      >
-        {/* Heading */}
-        <div className="text-left mb-12 w-[400px] h-[34px] opacity-100">
-          <h2
-            className="font-poppins font-semibold text-[48px] leading-[56px] tracking-[0]
-            bg-[radial-gradient(425.56%_425.56%_at_50%_50%,_#8076F4_0%,_#FFFFFF_9.96%)]
-            text-transparent bg-clip-text"
-          >
-            Related Insights
-          </h2>
-        </div>
-
-        {/* Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 ">
-          {[
-            {
-              img: i1,
-              title: "VIRTUAL PROTOTYPING",
-              desc:
-                "Digital twins enable faster product testing & refinement through accurate virtual models.",
-            },
-            {
-              img: i2,
-              title: "SMART OPERATIONS",
-              desc: "They optimize real-time performance by predicting issues before they occur.",
-            },
-            {
-              img: i3,
-              title: "DATA-DRIVEN INNOVATION",
-              desc:
-                "Insights from digital twins drive continuous improvement and new business models.",
-            },
-          ].map((card, i) => (
-            <motion.div
-              key={i}
-              className="w-[400px] h-[556px] bg-[#22252B] border-b-4 border-[#DADBDD] rounded-[4px] overflow-hidden flex flex-col justify-between shadow-md hover:shadow-[0_0_15px_rgba(169,92,236,0.3)] transition-all duration-300"
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.2 }}
-            >
-              {/* Image */}
-              <img src={card.img} alt={card.title} className="w-full h-[300px] object-cover" />
-
-              {/* Content */}
-              <div className="flex flex-col justify-between flex-grow px-6 py-6">
-                <div>
-                  <h3 className="text-[20px] font-semibold mb-3 text-[#ECEDEE]">{card.title}</h3>
-                  <p className="text-[#A0A0A0] text-[15px] leading-relaxed">{card.desc}</p>
-                </div>
-
-                {/* Learn More Button */}
-                <div className="flex justify-end items-end">
-                  <button className="mt-6 flex items-center text-[#ECEDEE] text-[15px] font-medium hover:text-[#E50000] transition">
-                    <span>Learn more</span>
-                    <div className="relative w-[56px] h-[56px] flex items-center justify-center">
-                      <img src={Ellipse} alt="ellipse" className="w-full h-full" />
-                      <img src={narrow} alt="arrow" className="absolute w-[11.5px] h-[20px]" />
-                    </div>
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Navigation Arrows */}
-        <motion.div
-          className="flex justify-end mt-12 space-x-4"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-        >
-          <button
-            className="w-[48px] h-[48px] border border-[#E50000] rounded-full flex items-center justify-center 
-                     hover:bg-[#E50000] transition duration-300 group"
-          >
-            <span className="inline-block text-[#E50000] text-xl group-hover:text-white w-4 h-6 leading-none">
-              ‹
-            </span>
-          </button>
-
-          {/* Right Arrow */}
-          <button
-            className="w-[48px] h-[48px] border border-[#E50000] rounded-full flex items-center justify-center 
-                     hover:bg-[#E50000] transition duration-300 group"
-          >
-            <span className="text-[#E50000] text-xl group-hover:text-white">›</span>
-          </button>
-        </motion.div>
-      </motion.section>
+      <InsightSection
+        title="Related Insights"
+        cards={cards}
+        autoSlideInterval={6000}
+      />
 
       <section className="bg-black text-white mx-auto">
         <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-0 py-10">

@@ -1,7 +1,12 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
 
 /* ------------------------------- ASSETS ---------------------------------- */
 import threat from "../Images/artificial-img.png";
@@ -36,6 +41,7 @@ import res3 from "@/Images/AI/res3.png";
 import i1 from "../Images/AI/i1.png";
 import i2 from "../Images/AI/i2.png";
 import i3 from "../Images/AI/i3.png";
+import InsightSection from "@/components/InsightSection";
 
 /* ----------------------------- ANIM HELPERS ------------------------------ */
 const fadeUp = (delay = 0) => ({
@@ -65,6 +71,9 @@ const FadeInSection: React.FC<{ children: React.ReactNode; delay?: number }> = (
 };
 
 export default function ArtificialIntelligence() {
+  const swiperRef = useRef<any>(null);
+
+
   const industries = [
     {
       name: "Healthcare",
@@ -103,6 +112,52 @@ export default function ArtificialIntelligence() {
       desc: "Optimize global supply chains with predictive analytics, IoT integration, and seamless delivery tracking powered by cloud technology.",
     },
   ];
+  const cards = [
+    {
+      img: i1,
+      title: "SMART AUTOMATION",
+      desc: "See how AI streamlines workflows and boosts efficiency.",
+    },
+    {
+      img: i2,
+      title: "PREDICTIVE ANALYTICS",
+      desc: "Discover how data-driven insights help forecast trends and outcomes.",
+    },
+    {
+      img: i3,
+      title: "INTELLIGENT SOLUTIONS",
+      desc: "Learn how AI innovations create smarter, adaptive applications.",
+    },
+    {
+      img: i1,
+      title: "SMART AUTOMATION",
+      desc: "See how AI streamlines workflows and boosts efficiency.",
+    },
+  ];
+
+   const cards1 = [
+    {
+      img: MindfulChef,
+      title: "Machine Learning Engineering",
+      desc: "Design, train, and deploy custom models with full lifecycle MLOps.",
+    },
+    {
+      img: Thursday,
+      title: "Natural Language & Speech AI",
+      desc: "Enable smarter interactions with chatbots, voice assistants, and NLP tools.",
+    },
+    {
+      img: Gener8,
+      title: "Responsible AI Governance",
+      desc: "Ensure fairness, explainability, and compliance across all AI deployments.",
+    },
+    {
+      img: MindfulChef,
+      title: "AI Infrastructure Optimization",
+      desc: "Build scalable pipelines and manage GPU workloads efficiently across environments.",
+    },
+  ];
+ 
   const [active, setActive] = useState(industries[0]);
 
   return (
@@ -237,13 +292,8 @@ export default function ArtificialIntelligence() {
       </section>
 
       {/* --------------------------- CAPABILITIES ---------------------------- */}
-      <motion.section
-        className="w-full bg-black text-white py-20 px-6 md:px-12 mx-auto max-w-[1380px]"
-        variants={fadeUp(0.05)}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-      >
+      <section className="w-full bg-black text-white py-20 px-6 md:px-12 mx-auto max-w-[1380px]">
+        {/* Heading */}
         <div className="mx-auto mb-12">
           <h2 className="text-3xl sm:text-[44px] md:text-[48px] font-extrabold leading-tight">
             HPIT AI{" "}
@@ -256,81 +306,79 @@ export default function ArtificialIntelligence() {
           </p>
         </div>
 
-        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center">
-          {[
-            {
-              img: MindfulChef,
-              title: "Machine Learning Engineering",
-              desc: "Design, train, and deploy custom models with full lifecycle MLOps.",
-            },
-            {
-              img: Thursday,
-              title: "Natural Language & Speech AI",
-              desc: "Enable smarter interactions with chatbots, voice assistants, and NLP tools.",
-            },
-            {
-              img: Gener8,
-              title: "Responsible AI Governance",
-              desc: "Ensure fairness, explainability, and compliance across all AI deployments.",
-            },
-          ].map((card, i) => (
-            <motion.article
-              key={card.title}
-              className="w-full max-w-[416px] min-h-[520px] bg-[#22252B] border-b-4 border-[#DADBDD] rounded-[6px]
+        {/* Swiper Carousel */}
+        <Swiper
+          modules={[Autoplay, Navigation]}
+          onSwiper={(swiper) => (swiperRef.current = swiper)}
+          spaceBetween={30}
+          slidesPerView={3}
+          loop={true}
+          autoplay={{ delay: 6000, disableOnInteraction: false }}
+          breakpoints={{
+            0: { slidesPerView: 1 },
+            640: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+          }}
+          className="overflow-hidden"
+        >
+          {cards1.map((card, i) => (
+            <SwiperSlide key={i}>
+              <motion.div
+                className="w-full max-w-[416px] min-h-[520px] bg-[#22252B] border-b-4 border-[#DADBDD] rounded-[6px]
                          overflow-hidden flex flex-col justify-between shadow-md transition-all duration-300
                          hover:shadow-[0_0_24px_rgba(169,92,236,0.28)] hover:-translate-y-1"
-              variants={pop(0.08 * i)}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              <img src={card.img} alt={card.title} className="w-full h-[260px] object-cover" />
-              <div className="flex flex-col justify-between flex-grow px-6 py-6">
-                <div>
-                  <h3 className="text-[18px] md:text-[20px] font-semibold mb-3 text-[#ECEDEE]">
-                    {card.title}
-                  </h3>
-                  <p className="text-[#A0A0A0] text-[15px] leading-relaxed">{card.desc}</p>
-                </div>
-                <div className="flex justify-end items-end">
-                  <button
-                    className="mt-6 flex items-center text-[#ECEDEE] text-[15px] font-medium
-                               hover:text-[#E50000] transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E50000]/60 rounded-full"
-                  >
-                    <span>Learn more</span>
-                    <span className="relative w-14 h-14 inline-flex items-center justify-center">
-                      <img src={Ellipse} alt="" className="w-full h-full" />
-                      <img src={narrow} alt="" className="absolute w-[11.5px] h-5" />
-                    </span>
-                  </button>
-                </div>
-              </div>
-            </motion.article>
-          ))}
-        </div>
+                whileHover={{ y: -4 }}
+              >
+                <img
+                  src={card.img}
+                  alt={card.title}
+                  className="w-full h-[260px] object-cover"
+                />
+                <div className="flex flex-col justify-between flex-grow px-6 py-6">
+                  <div>
+                    <h3 className="text-[18px] md:text-[20px] font-semibold mb-3 text-[#ECEDEE]">
+                      {card.title}
+                    </h3>
+                    <p className="text-[#A0A0A0] text-[15px] leading-relaxed">
+                      {card.desc}
+                    </p>
+                  </div>
 
-        {/* Nav Arrows */}
-        <motion.div
-          className="flex justify-end mt-12 space-x-4"
-          variants={fadeUp(0.2)}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
+                  <div className="flex justify-end items-end">
+                    <button className="mt-6 flex items-center text-[#ECEDEE] text-[15px] font-medium hover:text-[#E50000] transition">
+                      <span>Learn more</span>
+                      <div className="relative w-[56px] h-[56px] flex items-center justify-center">
+                        <img src={Ellipse} alt="ellipse" className="w-full h-full" />
+                        <img
+                          src={narrow}
+                          alt="arrow"
+                          className="absolute w-[11.5px] h-[20px]"
+                        />
+                      </div>
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+
+        {/* Navigation Arrows */}
+        <div className="flex justify-end mt-12 space-x-4">
           <button
-            className="w-12 h-12 border border-[#E50000] rounded-full grid place-items-center
-                       hover:bg-[#E50000] transition group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E50000]/60"
+            onClick={() => swiperRef.current?.slidePrev()}
+            className="w-[48px] h-[48px] border border-[#E50000] rounded-full flex items-center justify-center hover:bg-[#E50000] transition duration-300 group"
           >
-            <span className="text-[#E50000] group-hover:text-white text-xl leading-none">‹</span>
+            <span className="text-[#E50000] text-xl group-hover:text-white">‹</span>
           </button>
           <button
-            className="w-12 h-12 border border-[#E50000] rounded-full grid place-items-center
-                       hover:bg-[#E50000] transition group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E50000]/60"
+            onClick={() => swiperRef.current?.slideNext()}
+            className="w-[48px] h-[48px] border border-[#E50000] rounded-full flex items-center justify-center hover:bg-[#E50000] transition duration-300 group"
           >
-            <span className="text-[#E50000] group-hover:text-white text-xl">›</span>
+            <span className="text-[#E50000] text-xl group-hover:text-white">›</span>
           </button>
-        </motion.div>
-      </motion.section>
+        </div>
+      </section>
 
       {/* --------------------------- REAL WORLD IMPACT ----------------------- */}
       <section className="px-4 sm:px-8 lg:px-20">
@@ -517,85 +565,11 @@ export default function ArtificialIntelligence() {
       </FadeInSection>
 
       {/* ---------------------------- RELATED INSIGHTS ----------------------- */}
-      <motion.section
-        className="w-full bg-black text-white py-20 px-6 md:px-12 mx-auto max-w-[1350px]"
-        variants={fadeUp(0.05)}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-      >
-        <div className="text-left mb-8 md:mb-12">
-          <h2
-            className="font-poppins font-semibold text-[32px] sm:text-[40px] md:text-[48px] leading-[1.15]
-                       bg-[radial-gradient(425.56%_425.56%_at_50%_50%,_#8076F4_0%,_#FFFFFF_9.96%)]
-                       text-transparent bg-clip-text"
-          >
-            Related Insights
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center">
-          {[
-            { img: i1, title: "SMART AUTOMATION", desc: "See how AI streamlines workflows and boosts efficiency." },
-            { img: i2, title: "PREDICTIVE ANALYTICS", desc: "Discover how data-driven insights help forecast trends and outcomes." },
-            { img: i3, title: "INTELLIGENT SOLUTIONS", desc: "Learn how AI innovations create smarter, adaptive applications." },
-          ].map((card, i) => (
-            <motion.article
-              key={card.title}
-              className="w-full max-w-[400px] min-h-[520px] bg-[#22252B] border-b-4 border-[#DADBDD] rounded-[6px]
-                         overflow-hidden flex flex-col justify-between shadow-md transition-all duration-300
-                         hover:shadow-[0_0_24px_rgba(169,92,236,0.28)] hover:-translate-y-1"
-              variants={pop(0.08 * i)}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              <img src={card.img} alt={card.title} className="w-full h-[260px] object-cover" />
-              <div className="flex flex-col justify-between flex-grow px-6 py-6">
-                <div>
-                  <h3 className="text-[18px] md:text-[20px] font-semibold mb-3 text-[#ECEDEE]">
-                    {card.title}
-                  </h3>
-                  <p className="text-[#A0A0A0] text-[15px] leading-relaxed">{card.desc}</p>
-                </div>
-                <div className="flex justify-end items-end">
-                  <button
-                    className="mt-6 flex items-center text-[#ECEDEE] text-[15px] font-medium
-                               hover:text-[#E50000] transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E50000]/60 rounded-full"
-                  >
-                    <span>Learn more</span>
-                    <span className="relative w-14 h-14 inline-flex items-center justify-center">
-                      <img src={Ellipse} alt="" className="w-full h-full" />
-                      <img src={narrow} alt="" className="absolute w-[11.5px] h-5" />
-                    </span>
-                  </button>
-                </div>
-              </div>
-            </motion.article>
-          ))}
-        </div>
-
-        <motion.div
-          className="flex justify-end mt-12 space-x-4"
-          variants={fadeUp(0.2)}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          <button
-            className="w-12 h-12 border border-[#E50000] rounded-full grid place-items-center
-                       hover:bg-[#E50000] transition group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E50000]/60"
-          >
-            <span className="text-[#E50000] group-hover:text-white text-xl leading-none">‹</span>
-          </button>
-          <button
-            className="w-12 h-12 border border-[#E50000] rounded-full grid place-items-center
-                       hover:bg-[#E50000] transition group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E50000]/60"
-          >
-            <span className="text-[#E50000] group-hover:text-white text-xl">›</span>
-          </button>
-        </motion.div>
-      </motion.section>
+      <InsightSection
+        title="Related Insights"
+        cards={cards}
+        autoSlideInterval={6000}
+      />
 
       {/* -------------------------------- RESOURCES -------------------------- */}
       <section className="bg-black text-white mx-auto">

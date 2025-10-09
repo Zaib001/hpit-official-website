@@ -37,6 +37,7 @@ import res3 from "@/Images/CR/res3.png";
 import i1 from "../Images/CR/i1.png";
 import i2 from "../Images/CR/i2.jpg";
 import i3 from "../Images/CR/i3.png";
+import InsightSection from "@/components/InsightSection";
 
 
 const fadeUp = (delay = 0) => ({
@@ -100,6 +101,29 @@ const ToolBadge: React.FC<{ logo: string; label: string; imgClass?: string }> = 
     <p className="text-white text-sm md:text-base mt-4 whitespace-nowrap opacity-80 group-hover:opacity-100">{label}</p>
   </div>
 );
+
+const cards = [
+  {
+    img: i1,
+    title: "BUSINESS CONTINUITY",
+    desc: "Ensure operations stay uninterrupted during cyber disruptions.",
+  },
+  {
+    img: i2,
+    title: "ADAPTIVE DEFENSE",
+    desc: "Learn how flexible strategies strengthen protection against evolving threats.",
+  },
+  {
+    img: i3,
+    title: "RAPID RECOVERY",
+    desc: "Discover approaches to quickly restore systems after an attack.",
+  },
+    {
+    img: i2,
+    title: "ADAPTIVE DEFENSE",
+    desc: "Learn how flexible strategies strengthen protection against evolving threats.",
+  },
+];
 
 
 export default function CyberRegilliance() {
@@ -276,7 +300,7 @@ export default function CyberRegilliance() {
               </p>
             </motion.div>
 
-          
+
 
             {/* Two cards row */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -602,119 +626,11 @@ export default function CyberRegilliance() {
         </section>
       </FadeInSection>
 
-      <motion.section
-        className="w-full bg-black text-white py-20 px-6 md:px-12 mx-auto max-w-[1350px]"
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-      >
-        {/* Heading */}
-        <div className="text-left mb-12 w-[400px] h-[34px] opacity-100">
-          <h2
-            className="font-poppins font-semibold text-[48px] leading-[56px] tracking-[0]
-            bg-[radial-gradient(425.56%_425.56%_at_50%_50%,_#8076F4_0%,_#FFFFFF_9.96%)]
-            text-transparent bg-clip-text"
-          >
-            Related Insights
-          </h2>
-        </div>
-
-
-
-        {/* Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 ">
-          {[
-            {
-              img: i1,
-              title: "BUSINESS CONTINUITY",
-              desc: "Ensure operations stay uninterrupted during cyber disruptions.",
-            },
-            {
-              img: i2,
-              title: "ADAPTIVE DEFENSE",
-              desc: "Learn how flexible strategies strengthen protection against evolving threats.",
-            },
-            {
-              img: i3,
-              title: "RAPID RECOVERY",
-              desc: "Discover approaches to quickly restore systems after an attack.",
-            },
-          ].map((card, i) => (
-            <motion.div
-              key={i}
-              className="w-[400px] h-[556px] bg-[#22252B] border-b-4 border-[#DADBDD] rounded-[4px] overflow-hidden flex flex-col justify-between shadow-md hover:shadow-[0_0_15px_rgba(169,92,236,0.3)] transition-all duration-300"
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.2 }}
-            >
-              {/* Image */}
-              <img
-                src={card.img}
-                alt={card.title}
-                className="w-full h-[300px] object-cover"
-              />
-
-              {/* Content */}
-              <div className="flex flex-col justify-between flex-grow px-6 py-6">
-                <div>
-                  <h3 className="text-[20px] font-semibold mb-3 text-[#ECEDEE]">
-                    {card.title}
-                  </h3>
-                  <p className="text-[#A0A0A0] text-[15px] leading-relaxed">
-                    {card.desc}
-                  </p>
-                </div>
-
-                {/* Learn More Button */}
-                <div className="flex justify-end items-end">
-                  <button className="mt-6 flex items-center text-[#ECEDEE] text-[15px] font-medium hover:text-[#E50000] transition">
-                    <span >Learn more</span>
-                    <div className="relative w-[56px] h-[56px] flex items-center justify-center">
-                      <img src={Ellipse} alt="ellipse" className="w-full h-full" />
-                      <img
-                        src={narrow}
-                        alt="arrow"
-                        className="absolute w-[11.5px] h-[20px]"
-                      />
-                    </div>
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-
-        {/* Navigation Arrows */}
-        <motion.div
-          className="flex justify-end mt-12 space-x-4"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-        >
-          <button
-            className="w-[48px] h-[48px] border border-[#E50000] rounded-full flex items-center justify-center 
-                     hover:bg-[#E50000] transition duration-300 group"
-          >
-            <span
-              className="inline-block text-[#E50000] text-xl group-hover:text-white w-4 h-6 leading-none"
-            >
-              ‹
-            </span>
-          </button>
-
-          {/* Right Arrow */}
-          <button
-            className="w-[48px] h-[48px] border border-[#E50000] rounded-full flex items-center justify-center 
-                     hover:bg-[#E50000] transition duration-300 group"
-          >
-            <span className="text-[#E50000] text-xl group-hover:text-white">›</span>
-          </button>
-        </motion.div>
-      </motion.section>
+      <InsightSection
+        title="Related Insights"
+        cards={cards}
+        autoSlideInterval={6000}
+      />
 
 
       <section className="bg-black text-white mx-auto">
@@ -795,30 +711,3 @@ export default function CyberRegilliance() {
   );
 }
 
-// Card Component (unused here, kept as is)
-const Card = ({ title, description }) => {
-  return (
-    <motion.div
-      className="w-[405px] h-[240px] rounded-md border border-[#444955] bg-[#111215] relative"
-      style={{
-        borderWidth: "1.5px",
-        borderStyle: "dashed",
-        paddingTop: "40px",
-        paddingLeft: "24px",
-        paddingRight: "24px",
-        paddingBottom: "24px",
-      }}
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.7 }}
-    >
-      <h3 className="text-[24px] font-semibold mb-[30px] leading-snug">
-        {title}
-      </h3>
-      <p className="text-gray-400 text-[16px] leading-relaxed">{description}</p>
-    </motion.div>
-
-
-  );
-};

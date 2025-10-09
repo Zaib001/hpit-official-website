@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import { useRef } from "react";
 import { motion } from "framer-motion";
 
 import dw_h from "./images/dw-h.png";
@@ -33,8 +33,16 @@ import i2 from "../Images/digitalworkplace/i2.png";
 import i3 from "../Images/digitalworkplace/i3.png";
 
 import narrow from "@/svg/Arrow 1.svg";
+import InsightSection from "@/components/InsightSection";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
 
 export default function DigitalWorkplace() {
+  const swiperRef = useRef<any>(null);
+
   // Animation helpers (used throughout)
   const fadeUp = (delay = 0) => ({
     initial: { opacity: 0, y: 28 },
@@ -50,40 +58,7 @@ export default function DigitalWorkplace() {
     viewport: { once: true, amount: 0.2 },
   });
 
-  // (Defined but not used in your layout; leaving as-is to avoid changing structure)
-  const Card = ({ title, description }) => {
-    const words = title.trim().split(" ");
-    const length = words.length;
-    const firstLine = words.slice(0, length - 1).join(" ");
-    const lastWord = words[length - 1];
 
-    return (
-      <motion.div
-        className="w-full max-w-[380px] sm:max-w-none h-auto min-h-[240px] rounded-md border border-[#444955] bg-[#111215] relative"
-        style={{
-          borderWidth: "1.5px",
-          borderStyle: "dashed",
-          paddingTop: "40px",
-          paddingLeft: "24px",
-          paddingRight: "24px",
-          paddingBottom: "24px",
-        }}
-        {...fadeUp(0)}
-        whileHover={{ scale: 1.03, boxShadow: "0 14px 40px rgba(0,0,0,0.35)" }}
-      >
-        <h3 className="text-[24px] font-semibold mb-[30px] leading-snug">
-          {firstLine && (
-            <>
-              {firstLine}
-              <br />
-            </>
-          )}
-          {lastWord}
-        </h3>
-        <p className="text-gray-400 text-[16px] leading-relaxed">{description}</p>
-      </motion.div>
-    );
-  };
 
   const services = [
     {
@@ -107,6 +82,13 @@ export default function DigitalWorkplace() {
       gradient: "from-[#000000] to-[#FF6967]",
       borderColor: "#FF6967",
     },
+    {
+      img: desktop,
+      title: "Virtual Desktop Solutions",
+      desc: "Empower employees to work anywhere with fast, secure, and scalable virtual desktop environments.",
+      gradient: "from-[#000000] to-[#A36727]",
+      borderColor: "#A36727",
+    },
   ];
 
   const features = [
@@ -129,6 +111,29 @@ export default function DigitalWorkplace() {
     {
       title: "Flexibility",
       desc: "Teams can work anytime, anywhere with access to digital tools. It ensures adaptability and smooth business flow.",
+    },
+  ];
+
+  const cards = [
+    {
+      img: i1,
+      title: "COLLABORATION TOOLS",
+      desc: "Empowering teams with seamless communication and shared platforms.",
+    },
+    {
+      img: i2,
+      title: "REMOTE PRODUCTIVITY",
+      desc: "Enabling employees to work efficiently from anywhere.",
+    },
+    {
+      img: i3,
+      title: "EMPLOYEE ENGAGEMENT",
+      desc: "Enhancing workplace culture with digital-first experiences.",
+    },
+    {
+      img: i2,
+      title: "REMOTE PRODUCTIVITY",
+      desc: "Enabling employees to work efficiently from anywhere.",
     },
   ];
 
@@ -283,6 +288,7 @@ export default function DigitalWorkplace() {
       {/* Services We Offer */}
       <section className="w-full bg-black text-white py-20 px-6 md:px-16">
         <div className="max-w-7xl mx-auto">
+          {/* Title */}
           <motion.h2
             className="font-poppins font-semibold text-[40px] sm:text-[56px] md:text-[64px] leading-[1.1] text-white"
             initial={{ opacity: 0, y: 20 }}
@@ -296,61 +302,83 @@ export default function DigitalWorkplace() {
             </span>
           </motion.h2>
 
-          {/* Cards */}
-          <div className="mt-10 sm:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Carousel */}
+          <Swiper
+            modules={[Autoplay, Navigation]}
+            onSwiper={(swiper) => (swiperRef.current = swiper)}
+            spaceBetween={30}
+            slidesPerView={3}
+            loop={true}
+            autoplay={{ delay: 6000, disableOnInteraction: false }}
+            breakpoints={{
+              0: { slidesPerView: 1 },
+              640: { slidesPerView: 2 },
+              1024: { slidesPerView: 3 },
+            }}
+            className="mt-10 sm:mt-14 overflow-hidden"
+          >
             {services.map((service, i) => (
-              <motion.div
-                key={i}
-                className="relative bg-[#101010] border border-[#333] rounded-[4px] overflow-hidden flex flex-col transition hover:shadow-[0_0_20px_rgba(169,92,236,0.25)] border-b-[4px]"
-                style={{ borderBottomColor: service.borderColor || "#A95CEC" }}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: i * 0.2 }}
-                whileHover={{ y: -4 }}
-              >
-                <img src={service.img} alt={service.title} className="w-full h-[240px] sm:h-[250px] object-cover" />
+              <SwiperSlide key={i}>
+                <motion.div
+                  className="relative bg-[#101010] border border-[#333] rounded-[4px] overflow-hidden flex flex-col 
+                           transition hover:shadow-[0_0_20px_rgba(169,92,236,0.25)] border-b-[4px]"
+                  style={{ borderBottomColor: service.borderColor }}
+                  whileHover={{ y: -4 }}
+                >
+                  <img
+                    src={service.img}
+                    alt={service.title}
+                    className="w-full h-[240px] sm:h-[250px] object-cover"
+                  />
 
-                 <div
-                  className={`absolute bottom-0 left-0 right-0 h-[45%] z-10 bg-gradient-to-b ${service.gradient} from-black/0 via-black/40 opacity-40`}
-                ></div>
+                  <div
+                    className={`absolute bottom-0 left-0 right-0 h-[45%] z-10 bg-gradient-to-b ${service.gradient} from-black/0 via-black/40 opacity-40`}
+                  ></div>
 
-                <div className="relative z-10 flex flex-col justify-between flex-grow p-6">
-                  <div>
-                    <h3 className="font-poppins font-semibold text-[22px] sm:text-[24px] leading-[33px] tracking-[1%] text-[#DADBDD] mb-3">
-                      {service.title}
-                    </h3>
-                    <p className="font-poppins text-[15px] sm:text-[16px] leading-[28px] sm:leading-[30px] tracking-[1%] text-[#DADBDD] opacity-90">
-                      {service.desc}
-                    </p>
-                  </div>
-
-                  <motion.button
-                    whileHover={{ x: 2 }}
-                    className="mt-8 flex items-center text-[#ECEDEE] text-[15px] font-medium group transition"
-                  >
-                    Learn more
-                    <div className="relative w-[56px] h-[56px] ml-3">
-                      <img src={Ellipse} alt="ellipse" className="w-full h-full" />
-                      <span className="absolute inset-0 flex items-center justify-center text-white text-xl">
-                        <img
-                          src={arrow}
-                          alt="arrow"
-                          className="w-[11.5px] h-[20px] group-hover:translate-x-1 transition-transform"
-                        />
-                      </span>
+                  <div className="relative z-10 flex flex-col justify-between flex-grow p-6">
+                    <div>
+                      <h3 className="font-poppins font-semibold text-[22px] sm:text-[24px] leading-[33px] text-[#DADBDD] mb-3">
+                        {service.title}
+                      </h3>
+                      <p className="font-poppins text-[15px] sm:text-[16px] leading-[28px] text-[#DADBDD] opacity-90">
+                        {service.desc}
+                      </p>
                     </div>
-                  </motion.button>
-                </div>
-              </motion.div>
+
+                    <motion.button
+                      whileHover={{ x: 2 }}
+                      className="mt-8 flex items-center text-[#ECEDEE] text-[15px] font-medium group transition"
+                    >
+                      Learn more
+                      <div className="relative w-[56px] h-[56px] ml-3">
+                        <img src={Ellipse} alt="ellipse" className="w-full h-full" />
+                        <span className="absolute inset-0 flex items-center justify-center text-white text-xl">
+                          <img
+                            src={arrow}
+                            alt="arrow"
+                            className="w-[11.5px] h-[20px] group-hover:translate-x-1 transition-transform"
+                          />
+                        </span>
+                      </div>
+                    </motion.button>
+                  </div>
+                </motion.div>
+              </SwiperSlide>
             ))}
-          </div>
+          </Swiper>
 
           {/* Navigation Arrows */}
           <div className="flex justify-end mt-10 space-x-5">
-            <button className="w-[48px] h-[48px] border border-[#DC1414] rounded-full flex items-center justify-center hover:bg-[#DC1414] transition">
+            <button
+              onClick={() => swiperRef.current?.slidePrev()}
+              className="w-[48px] h-[48px] border border-[#DC1414] rounded-full flex items-center justify-center hover:bg-[#DC1414] transition"
+            >
               <span className="text-[#DC1414] text-xl font-bold hover:text-white">‹</span>
             </button>
-            <button className="w-[48px] h-[48px] border border-[#DC1414] rounded-full flex items-center justify-center hover:bg-[#DC1414] transition">
+            <button
+              onClick={() => swiperRef.current?.slideNext()}
+              className="w-[48px] h-[48px] border border-[#DC1414] rounded-full flex items-center justify-center hover:bg-[#DC1414] transition"
+            >
               <span className="text-[#DC1414] text-xl font-bold hover:text-white">›</span>
             </button>
           </div>
@@ -688,7 +716,7 @@ export default function DigitalWorkplace() {
               <img
                 src={bg}
                 alt="digital"
-                className="w-full h-[220px] sm:h-[300px] md:h-[380px] object-cover rounded-xl -rotate-90"
+                className="w-[518px] h-[220px] sm:h-[300px] md:h-[375px]  object-cover rounded-xl -rotate-90"
               />
             </motion.div>
 
@@ -780,93 +808,11 @@ export default function DigitalWorkplace() {
       </section>
 
       {/* Related Insights */}
-      <motion.section
-        className="w-full bg-black text-white py-20 px-6 md:px-12 mx-auto max-w-[1350px]"
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-      >
-        <div className="text-left mb-12">
-          <h2
-            className="font-poppins font-semibold text-[36px] sm:text-[44px] md:text-[48px] leading-[1.15]
-            bg-[radial-gradient(425.56%_425.56%_at_50%_50%,_#8076F4_0%,_#FFFFFF_9.96%)]
-            text-transparent bg-clip-text"
-          >
-            Related Insights
-          </h2>
-        </div>
-
-        {/* Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr">
-          {[
-            {
-              img: i1,
-              title: "COLLABORATION TOOLS",
-              desc: "Empowering teams with seamless communication and shared platforms.",
-            },
-            {
-              img: i2,
-              title: "REMOTE PRODUCTIVITY",
-              desc: "Enabling employees to work efficiently from anywhere.",
-            },
-            {
-              img: i3,
-              title: "EMPLOYEE ENGAGEMENT",
-              desc: "Enhancing workplace culture with digital-first experiences.",
-            },
-          ].map((card, i) => (
-            <motion.div
-              key={i}
-              className="w-full sm:w-full lg:w-full bg-[#22252B] border-b-4 border-[#DADBDD] rounded-[4px] overflow-hidden flex flex-col justify-between shadow-md transition-all duration-300"
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.2 }}
-              whileHover={{ y: -4, boxShadow: "0 0 15px rgba(169,92,236,0.3)" }}
-            >
-              <img src={card.img} alt={card.title} className="w-full h-[240px] sm:h-[300px] object-cover" />
-
-              <div className="flex flex-col justify-between flex-grow px-6 py-6">
-                <div>
-                  <h3 className="text-[18px] sm:text-[20px] font-semibold mb-3 text-[#ECEDEE]">
-                    {card.title}
-                  </h3>
-                  <p className="text-[#A0A0A0] text-[15px] leading-relaxed">{card.desc}</p>
-                </div>
-
-                <div className="flex justify-end items-end">
-                  <button className="mt-6 flex items-center text-[#ECEDEE] text-[15px] font-medium hover:text-[#E50000] transition">
-                    <span>Learn more</span>
-                    <div className="relative w-[56px] h-[56px] flex items-center justify-center">
-                      <img src={Ellipse} alt="ellipse" className="w-full h-full" />
-                      <img src={narrow} alt="arrow" className="absolute w-[11.5px] h-[20px]" />
-                    </div>
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Nav Arrows */}
-        <motion.div
-          className="flex justify-end mt-12 space-x-4"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-        >
-          <button className="w-[48px] h-[48px] border border-[#E50000] rounded-full flex items-center justify-center hover:bg-[#E50000] transition duration-300 group">
-            <span className="inline-block text-[#E50000] text-xl group-hover:text-white w-4 h-6 leading-none">
-              ‹
-            </span>
-          </button>
-          <button className="w-[48px] h-[48px] border border-[#E50000] rounded-full flex items-center justify-center hover:bg-[#E50000] transition duration-300 group">
-            <span className="text-[#E50000] text-xl group-hover:text-white">›</span>
-          </button>
-        </motion.div>
-      </motion.section>
+      <InsightSection
+        title="Related Insights"
+        cards={cards}
+        autoSlideInterval={6000}
+      />
 
       {/* Resources */}
       <section className="bg-black text-white mx-auto">

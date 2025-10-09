@@ -30,6 +30,7 @@ import res3 from "@/Images/QC/res3.png";
 import i1 from "../Images/QC/i1.png";
 import i2 from "../Images/QC/i2.png";
 import i3 from "../Images/QC/i3.png";
+import InsightSection from "@/components/InsightSection";
 
 /* ----------------------------- ANIM HELPERS ------------------------------ */
 const fadeUp = (delay = 0) => ({
@@ -103,13 +104,35 @@ const CapabilityCard: React.FC<{ title: string; description: string }> = ({
         </motion.div>
     );
 };
+const cards = [
+    {
+        img: i1,
+        title: "NEXT-GEN PROCESSING",
+        desc: "Discover how quantum power accelerates complex problem-solving.",
+    },
+    {
+        img: i2,
+        title: "INNOVATION AT SCALE",
+        desc: "Learn how industries leverage quantum to unlock new possibilities.",
+    },
+    {
+        img: i3,
+        title: "FUTURE IMPACT",
+        desc: "See how quantum computing is shaping tomorrow’s digital landscape.",
+    },
+     {
+        img: i1,
+        title: "NEXT-GEN PROCESSING",
+        desc: "Discover how quantum power accelerates complex problem-solving.",
+    },
+];
 
 /* ================================= PAGE ================================== */
 export default function QuantumComputing() {
     return (
         <div className="min-h-screen flex flex-col bg-black text-white">
             {/* -------------------------------- HERO ------------------------------- */}
-              <FadeInSection>
+            <FadeInSection>
                 <div
                     className="min-h-screen bg-cover bg-center bg-no-repeat relative"
                     style={{ backgroundImage: `url(${quantumImg})` }}
@@ -478,85 +501,11 @@ export default function QuantumComputing() {
             </FadeInSection>
 
             {/* --------------------------- RELATED INSIGHTS ------------------------ */}
-            <motion.section
-                className="w-full bg-black text-white py-20 px-6 md:px-12 mx-auto max-w-[1350px]"
-                variants={fadeUp(0.05)}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-            >
-                <div className="text-left mb-8 md:mb-12">
-                    <h2
-                        className="font-poppins font-semibold text-[32px] sm:text-[40px] md:text-[48px] leading-[1.15]
-            bg-[radial-gradient(425.56%_425.56%_at_50%_50%,_#8076F4_0%,_#FFFFFF_9.96%)]
-            text-transparent bg-clip-text"
-                    >
-                        Related Insights
-                    </h2>
-                </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 place-items-center">
-                    {[
-                        { img: i1, title: "NEXT-GEN PROCESSING", desc: "Discover how quantum power accelerates complex problem-solving." },
-                        { img: i2, title: "INNOVATION AT SCALE", desc: "Learn how industries leverage quantum to unlock new possibilities." },
-                        { img: i3, title: "FUTURE IMPACT", desc: "See how quantum computing is shaping tomorrow’s digital landscape." },
-                    ].map((card, i) => (
-                        <motion.article
-                            key={card.title}
-                            className="w-full max-w-[400px] min-h-[520px] bg-[#22252B] border-b-4 border-[#DADBDD] rounded-[6px]
-                         overflow-hidden flex flex-col justify-between shadow-md transition-all duration-300
-                         hover:shadow-[0_0_24px_rgba(169,92,236,0.28)] hover:-translate-y-1"
-                            variants={pop(0.08 * i)}
-                            initial="hidden"
-                            whileInView="visible"
-                            viewport={{ once: true }}
-                        >
-                            <img src={card.img} alt={card.title} className="w-full h-[260px] object-cover" />
-                            <div className="flex flex-col justify-between flex-grow px-6 py-6">
-                                <div>
-                                    <h3 className="text-[18px] md:text-[20px] font-semibold mb-3 text-[#ECEDEE]">
-                                        {card.title}
-                                    </h3>
-                                    <p className="text-[#A0A0A0] text-[15px] leading-relaxed">{card.desc}</p>
-                                </div>
-                                <div className="flex justify-end items-end">
-                                    <button
-                                        className="mt-6 flex items-center text-[#ECEDEE] text-[15px] font-medium
-                               hover:text-[#E50000] transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E50000]/60 rounded-full"
-                                    >
-                                        <span>Learn more</span>
-                                        <span className="relative w-14 h-14 inline-flex items-center justify-center">
-                                            <img src={Ellipse} alt="" className="w-full h-full" />
-                                            <img src={narrow} alt="" className="absolute w-[11.5px] h-5" />
-                                        </span>
-                                    </button>
-                                </div>
-                            </div>
-                        </motion.article>
-                    ))}
-                </div>
-
-                <motion.div
-                    className="flex justify-end mt-12 space-x-4"
-                    variants={fadeUp(0.2)}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true }}
-                >
-                    <button
-                        className="w-12 h-12 border border-[#E50000] rounded-full grid place-items-center
-                       hover:bg-[#E50000] transition group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E50000]/60"
-                    >
-                        <span className="text-[#E50000] group-hover:text-white text-xl leading-none">‹</span>
-                    </button>
-                    <button
-                        className="w-12 h-12 border border-[#E50000] rounded-full grid place-items-center
-                       hover:bg-[#E50000] transition group focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E50000]/60"
-                    >
-                        <span className="text-[#E50000] group-hover:text-white text-xl">›</span>
-                    </button>
-                </motion.div>
-            </motion.section>
+            <InsightSection
+                title="Related Insights"
+                cards={cards}
+                autoSlideInterval={6000}
+            />
 
             {/* -------------------------------- RESOURCES -------------------------- */}
             <section className="bg-black text-white mx-auto">
