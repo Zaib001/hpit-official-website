@@ -60,7 +60,10 @@ import WhatWeDoSection from "../components/WhatWeDoSection";
 import InsightSection from "@/components/InsightSection";
 import AwardsSection from "@/components/AwardsSection";
 import ServicesCarousel from "@/components/ServicesCarousel";
+import WhatWeBelieve from "@/components/WhatWeBelieve";
 
+import bg from '../Images/bg-built.png'
+import HowWeWork from "@/components/HowWeWork";
 /* ----------------------------- Anim helpers ----------------------------- */
 const fadeUp = (delay = 0) => ({
   hidden: { opacity: 0, y: 40 },
@@ -108,11 +111,6 @@ const hoverEffect = {
 };
 
 /* ----------------------------- Data ----------------------------- */
-const awards = [
-  { img: award1, alt: "Washington Technology" },
-  { img: award2, alt: "Defense News Top 100" },
-  { img: award3, alt: "Bloomberg Government" },
-];
 
 const values = [
   { title: "Flexibility", text: "Adaptability to changing needs.", color: "#1ABCFE" },
@@ -171,47 +169,6 @@ const GradientHeading = ({
   </h2>
 );
 
-const CTAButton = ({ label, className = "" }: { label: string; className?: string }) => (
-  <a
-    href="#"
-    className={`group inline-flex items-center gap-2 font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A49CFD] rounded-full ${className}`}
-  >
-    <span className="transition-colors group-hover:text-[#A49CFD]">{label}</span>
-    <span className="relative w-14 h-14 -ml-3 inline-flex items-center justify-center">
-      <img src={Ellipse} alt="" className="w-full h-full" />
-      <img
-        src={arrow}
-        alt=""
-        className="absolute w-[11.5px] h-5 transition-transform duration-300 group-hover:translate-x-0.5"
-      />
-    </span>
-  </a>
-);
-
-const ToolBadge = ({
-  logo,
-  label,
-  imgClass = "",
-}: {
-  logo: string;
-  label: string;
-  imgClass?: string;
-}) => (
-  <div
-    className="bg-[#111215] rounded-lg px-6 py-6 flex flex-col items-center justify-center border border-transparent
-               transition-all duration-300 hover:border-[#A49CFD]/40 hover:shadow-[0_0_24px_rgba(164,156,253,0.08)]
-               hover:-translate-y-1 group"
-  >
-    <img
-      src={logo}
-      alt={label}
-      className={`object-contain transition duration-300 grayscale group-hover:grayscale-0 ${imgClass}`}
-    />
-    <p className="text-white text-sm md:text-base mt-4 whitespace-nowrap opacity-80 group-hover:opacity-100">
-      {label}
-    </p>
-  </div>
-);
 
 const journeyData = [
   {
@@ -349,168 +306,80 @@ export default function Company() {
       </FadeInSection>
 
       {/* ===================== MISSION & VISION ===================== */}
-      <FadeInSection delay={0.1}>
-        <div className="text-white px-4 sm:px-8 lg:px-20 py-16">
-          <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
-            <motion.div
-              className="space-y-6 mt-6 lg:mt-10"
-              initial={{ opacity: 0, x: -50 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true, amount: 0.2 }}
-            >
-              <h2
-                className="font-semibold leading-tight sm:leading-[56px] text-[32px] sm:text-[40px] md:text-[48px] tracking-[0]"
-                style={{ fontFamily: "Poppins" }}
-              >
-                <span
-                  className="bg-clip-text text-transparent"
-                  style={{
-                    backgroundImage:
-                      "radial-gradient(425.56% 425.56% at 50% 50%, #8076F4 0%, #FFFFFF 9.96%)",
-                  }}
-                >
-                  Our Mission &amp; Vision
-                </span>
-              </h2>
-
-              <p
-                className="text-[#DADBDD] font-normal text-base sm:text-[17px] md:text-[18px] leading-[28px] sm:leading-[30px] tracking-[0.01em] max-w-[46rem]"
-                style={{ fontFamily: "Poppins" }}
-              >
-                Our mission is to provide innovative, reliable, and high-quality solutions that
-                help businesses achieve their objectives efficiently. We envision a future
-                where our expertise drives meaningful growth and transformation for our
-                clients. By focusing on excellence, sustainability, and continuous
-                improvement, we aim to create long-term value for our clients, employees, and
-                the communities we serve, while staying adaptable to the ever-changing
-                business landscape
-              </p>
-
-              <motion.a
-                href="#"
-                className="inline-flex items-center gap-2 text-white font-medium group mt-10 sm:mt-16"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                viewport={{ once: true, amount: 0.2 }}
-              >
-                Get Started
-                <div className="relative w-[56px] h-[56px] flex items-center justify-center -ml-4">
-                  <img src={Ellipse} alt="ellipse" className="absolute inset-0 w-full h-full" />
-                  <svg
-                    className="w-4 h-4 text-white transform rotate-0 group-hover:rotate-45 transition duration-300"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    viewBox="0 0 24 24"
-                  >
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </div>
-              </motion.a>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              viewport={{ once: true, amount: 0.2 }}
-              className="rounded-xl overflow-hidden mt-10 lg:mt-20 flex justify-center lg:justify-end"
-            >
-              <img
-                src={CLG}
-                alt="Team Discussion"
-                className="w-full h-auto max-w-[560px] lg:max-w-[520px] xl:max-w-[560px] object-cover rounded-l-sm"
-              />
-            </motion.div>
-          </div>
-        </div>
-      </FadeInSection>
-
-      {/* ===================== WHAT WE BELIEVE ===================== */}
-      <div className="py-16 sm:py-20 bg-gradient-to-b from-black via-gray-900 to-black">
-        <div className="max-w-7xl mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true, amount: 0.2 }}
-            className="mb-8"
-          >
-            <h2 className="text-[34px] sm:text-[48px] md:text-6xl font-extrabold leading-tight text-white">
-              <span className="bg-[radial-gradient(425.56%_425.56%_at_50%_50%,_#8076F4_0%,_#FFFFFF_9.96%)] text-transparent bg-clip-text">
-                What We Believe
-              </span>
-            </h2>
-            <p
-              className="mt-4 text-[#DADBDD] font-medium text-base sm:text-[18px] md:text-[20px] leading-snug tracking-[0.01em] max-w-[51.3rem]"
+      <div className="text-white px-4 sm:px-8 lg:px-20 py-16">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
+          {/* Left Section (Text) */}
+          <div className="space-y-6 mt-6 lg:mt-10">
+            <h2
+              className="font-semibold leading-tight sm:leading-[56px] text-[32px] sm:text-[40px] md:text-[48px] tracking-[0]"
               style={{ fontFamily: "Poppins" }}
             >
-              We believe in innovation, integrity, and delivering value that drives success
-              for our clients and communities.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[
-              {
-                title: "PURPOSE",
-                text:
-                  "We believe in creating meaningful impact through our work, helping businesses grow while contributing positively to the communities we serve. Our purpose drives every decision and action we take.",
-              },
-              {
-                title: "MISSION",
-                text:
-                  "We believe in delivering innovative, reliable, and high-quality solutions that empower our clients to achieve their goals efficiently. Our mission guides us to focus on excellence, customer satisfaction, and continuous improvement.",
-              },
-              {
-                title: "VISION",
-                text:
-                  "We believe in a future of sustainable growth and transformative solutions. Our vision inspires us to adapt, innovate, and create lasting value for our clients, employees, and stakeholders.",
-              },
-            ].map((card, index) => (
-              <motion.div
-                key={card.title}
-                className="relative rounded-xl p-6 sm:p-7 min-h-[260px] flex flex-col overflow-hidden group cursor-pointer transition-all duration-500 border border-transparent bg-[#1a1a1a]"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.15 }}
-                viewport={{ once: true, amount: 0.2 }}
+              <span
+                className="bg-clip-text text-transparent"
+                style={{
+                  backgroundImage:
+                    "radial-gradient(425.56% 425.56% at 50% 50%, #8076F4 0%, #FFFFFF 9.96%)",
+                }}
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-all duration-500 ease-in-out rounded-xl" />
-                <motion.div
-                  className="absolute inset-0 border-2 border-transparent rounded-xl pointer-events-none"
-                  whileHover={{
-                    borderColor: "rgba(255,255,255,0.15)",
-                    boxShadow: "0 0 25px rgba(99,102,241,0.5)",
-                    scale: 1.02,
-                    transition: { duration: 0.35, ease: "easeOut" },
-                  }}
-                />
-                <div className="relative z-10">
-                  <h3 className="text-[24px] sm:text-[28px] md:text-[32px] font-semibold text-white mb-4 sm:mb-5">
-                    {card.title}
-                  </h3>
-                  <p className="text-[15px] sm:text-[16px] md:text-[18px] leading-relaxed text-gray-400 group-hover:text-white transition">
-                    {card.text}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
+                Our Mission &amp; Vision
+              </span>
+            </h2>
+
+            <p
+              className="text-[#DADBDD] font-normal text-base sm:text-[17px] md:text-[18px] leading-[28px] sm:leading-[30px] tracking-[0.01em] max-w-[46rem]"
+              style={{ fontFamily: "Poppins" }}
+            >
+              Our mission is to provide innovative, reliable, and high-quality solutions that
+              help businesses achieve their objectives efficiently. We envision a future
+              where our expertise drives meaningful growth and transformation for our
+              clients. By focusing on excellence, sustainability, and continuous
+              improvement, we aim to create long-term value for our clients, employees, and
+              the communities we serve, while staying adaptable to the ever-changing
+              business landscape.
+            </p>
+
+            <a
+              href="#"
+              className="inline-flex items-center gap-2 text-white font-medium group mt-10 sm:mt-16 transition-colors"
+            >
+              Get Started
+              <div className="relative w-[56px] h-[56px] flex items-center justify-center -ml-4">
+                <img src={Ellipse} alt="ellipse" className="absolute inset-0 w-full h-full" />
+                <svg
+                  className="w-4 h-4 text-white transform rotate-0 group-hover:rotate-45 transition duration-300"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </div>
+            </a>
+          </div>
+
+          {/* Right Section (Image) */}
+          <div className="rounded-xl overflow-hidden mt-10 lg:mt-20 flex justify-center lg:justify-end">
+            <img
+              src={CLG}
+              alt="Team Discussion"
+              className="w-full h-auto max-w-[560px] lg:max-w-[520px] xl:max-w-[560px] object-cover rounded-l-sm"
+            />
           </div>
         </div>
       </div>
 
+
+      {/* ===================== WHAT WE BELIEVE ===================== */}
+      <WhatWeBelieve />
+
+
       {/* ===================== CORE VALUES ===================== */}
       <FadeInSection delay={0.3}>
-        <div
-          ref={ref}
-          className="relative py-20 px-4 sm:px-8 lg:px-10 flex justify-center items-center"
-        >
+        <div ref={ref} className="relative py-16 sm:py-20 px-4 sm:px-8 lg:px-10 flex justify-center items-center">
           <motion.div
             style={{ y: yBg }}
-            className="relative w-full lg:w-[1296px] min-h-[560px] lg:h-[650px] rounded-[8px] border border-[#22252B] overflow-hidden backdrop-blur-sm"
+            className="relative w-full max-w-[1296px] min-h-[480px] sm:min-h-[560px] lg:min-h-[650px] rounded-lg border border-[#22252B] overflow-hidden backdrop-blur-sm"
           >
             {/* Background gradient */}
             <div
@@ -521,48 +390,36 @@ export default function Company() {
               }}
             />
 
-            {/* Top decorative image with parallax */}
+            {/* Top decorative image */}
             <motion.div
               style={{ y: yTop }}
-              className="absolute z-10 right-0 -top-8 w-[60%] max-w-[520px] h-auto lg:w-[657px] lg:h-[315px] lg:top-[-142px] lg:left-[851px]"
+              className="absolute z-10 right-0 -top-6 sm:-top-10 w-[70%] sm:w-[60%] lg:w-[520px] xl:w-[657px] h-auto"
             >
               <img
                 src={top}
                 alt="Decorative Top Right"
-                className="w-full h-full object-contain opacity-90 hover:scale-105 transition-transform duration-700 ease-out"
+                className="w-[80%] ml-32 h-full object-contain opacity-90 hover:scale-105 transition-transform duration-700 ease-out"
               />
             </motion.div>
 
-            {/* Giant Background Text */}
-            <div
-              className="hidden lg:block absolute z-0"
-              style={{ top: "525px", left: "122px" }}
-            >
+            {/* Giant background text */}
+            <div className="hidden lg:block absolute z-0 bottom-[-120px] left-[10%]">
               <motion.h1
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 0.06 }}
                 transition={{ duration: 1 }}
-                className="font-poppins font-semibold select-none"
-                style={{
-                  fontSize: "398px",
-                  lineHeight: "110px",
-                  color: "#FFFFFF",
-                  letterSpacing: "0px",
-                  position: "absolute",
-                }}
+                className="font-poppins font-semibold select-none text-[280px] xl:text-[398px] leading-none text-white"
               >
                 FIRST
               </motion.h1>
             </div>
 
             {/* Foreground content */}
-            <div className="relative z-10 mx-auto px-6 py-10 lg:py-12 w-full">
+            <div className="relative z-10 mx-auto w-full px-4 sm:px-8 lg:px-16 py-10 lg:py-14">
               {/* Animated shimmer title */}
               <motion.h2
-                className="text-left font-poppins font-semibold text-4xl md:text-5xl relative lg:absolute"
+                className="font-poppins font-semibold text-3xl sm:text-4xl md:text-5xl text-left mb-10 lg:mb-0"
                 style={{
-                  top: "65px",
-                  left: "40px",
                   background:
                     "radial-gradient(425.56% 425.56% at 50% 50%, #8076F4 0%, #FFFFFF 9.96%)",
                   WebkitBackgroundClip: "text",
@@ -574,21 +431,11 @@ export default function Company() {
                 }}
                 transition={{ duration: 8, repeat: Infinity }}
               >
-                <span className="block lg:hidden mb-6">Our Core Value</span>
-                <span className="hidden lg:block">Our Core Value</span>
+                Our Core Value
               </motion.h2>
 
-              {/* Value grid */}
-              <div
-                className="grid text-left gap-8 sm:gap-10 md:gap-12 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 mt-24 sm:mt-28 lg:mt-0 relative lg:absolute"
-                style={{
-                  width: "1145px",
-                  height: "157px",
-                  top: "225px",
-                  left: "76px",
-                  gap: "95px",
-                }}
-              >
+              {/* Values grid */}
+              <div className="grid gap-8 sm:gap-10 md:gap-12 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 mt-10 sm:mt-16">
                 {values.map((val, i) => (
                   <motion.div
                     key={val.title}
@@ -610,17 +457,14 @@ export default function Company() {
                       transition={{ duration: 0.4 }}
                     />
                     {/* Line indicator */}
-                    <div
-                      className="flex items-center mb-4 w-full max-w-[200px] transition-all duration-500"
-                      style={{ height: "20px", gap: "5px", opacity: 1 }}
-                    >
+                    <div className="flex items-center mb-4 w-full transition-all duration-500">
                       <motion.div
-                        className="w-[12px] h-[12px] rounded-full flex-shrink-0"
+                        className="w-[18px] h-[18px] rounded-full flex-shrink-0"
                         style={{ backgroundColor: val.color }}
                         whileHover={{ scale: 1.4 }}
                       />
                       <motion.div
-                        className="h-[2px] flex-1"
+                        className="h-[1px] flex-1 ml-2"
                         style={{ backgroundColor: val.color }}
                         whileHover={{ width: "120%" }}
                       />
@@ -639,6 +483,7 @@ export default function Company() {
           </motion.div>
         </div>
       </FadeInSection>
+
 
       {/* ===================== JOURNEY ===================== */}
       <div className="py-16 sm:py-20 px-6 md:px-12 lg:px-24 mx-auto">
@@ -682,8 +527,15 @@ export default function Company() {
           whileInView="show"
           viewport={{ once: true, amount: 0.25 }}
           className="relative w-full h-[55vh] max-w-[1296px] rounded-lg border border-[#444955] p-6 sm:p-8 md:p-12 bg-cover mt-10 sm:mt-14 md:mt-16 overflow-hidden"
-          style={{ backgroundImage: `url(${bgjourney})` }}
         >
+          <div
+            className="absolute right-0 w-[1342px] bottom-1 h-[472px] bg-cover bg-center rotate-[360deg] scale-x-[-1] z-0"
+            style={{
+              backgroundImage: `url(${bgjourney})`,
+            }}
+          />
+
+
           {/* Side Controls */}
           <div className="absolute left-4 sm:left-6 md:left-[80px] top-6 bottom-6 flex flex-col items-center">
             <motion.div
@@ -719,7 +571,7 @@ export default function Company() {
                 <motion.div
                   animate={{ scale: [1, 1.4, 1] }}
                   transition={{ duration: 1.5, repeat: Infinity }}
-                  className="w-3 h-3 rounded-full bg-red-500"
+                  className="w-3 h-3 rounded-full bg-black"
                 />
               </motion.div>
             </div>
@@ -810,98 +662,8 @@ export default function Company() {
       </div>
 
       {/* ===================== HOW WE WORK ===================== */}
-      <section className="relative py-16 sm:py-20 px-6 sm:px-10 lg:px-20 max-w-[1480px] mx-auto overflow-hidden">
-        <motion.h2
-          variants={fadeUp(0)}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, amount: 0.25 }}
-          className="text-4xl md:text-5xl font-bold text-left mb-8 sm:mb-12"
-        >
-          <motion.span
-            initial={{ backgroundPosition: "0% 50%" }}
-            animate={{ backgroundPosition: "100% 50%" }}
-            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-            className="bg-gradient-to-r from-purple-400 to-blue-400 bg-[length:200%_200%] bg-clip-text text-transparent"
-          >
-            How
-          </motion.span>{" "}
-          <span className="text-white">We Work</span>
-        </motion.h2>
+      <HowWeWork cards={cards1} />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 justify-items-center relative z-10">
-          {cards1.map((card, i) => (
-            <motion.div
-              key={i}
-              variants={fadeUp(i * 0.15)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.25 }}
-              whileHover={hoverEffect}
-              className="group relative w-full max-w-[340px] min-h-[280px] rounded-xl border border-[#22252B] bg-gradient-to-b from-[#0A0A0A] to-[#111111] p-6 flex flex-col justify-between shadow-md transition duration-300 hover:shadow-[0_8px_35px_rgba(128,118,244,0.15)]"
-            >
-              <div className="flex justify-between items-start mb-6">
-                <motion.img
-                  src={card.icon}
-                  alt={card.title}
-                  className="w-10 h-10 sm:w-12 sm:h-10 object-contain"
-                  whileHover={{ scale: 1.1, rotate: 3 }}
-                  transition={{ duration: 0.3 }}
-                />
-                <motion.div
-                  whileHover={{
-                    backgroundColor: "#EF4444",
-                    rotate: 45,
-                    borderColor: "#EF4444",
-                    transition: { duration: 0.3 },
-                  }}
-                  className="w-8 h-8 rounded-full border border-red-500 flex items-center justify-center cursor-pointer transition"
-                >
-                  <motion.span
-                    animate={{ x: [0, 2, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                    className="text-sm text-gray-200"
-                  >
-                    ➔
-                  </motion.span>
-                </motion.div>
-              </div>
-
-              <div className="flex flex-col gap-3">
-                <motion.h4
-                  className="font-poppins font-semibold text-[18px] md:text-[20px] lg:text-[22px] text-[#DADBDD] leading-[28px] md:leading-[30px]"
-                  whileHover={{ color: "#8076F4", transition: { duration: 0.3 } }}
-                >
-                  {card.title}
-                </motion.h4>
-                <motion.p
-                  className="font-poppins text-[15px] md:text-[16px] text-[#B8B9BB] leading-[24px]"
-                  whileInView={{ opacity: [0, 1], x: [10, 0] }}
-                  transition={{ duration: 0.6, delay: i * 0.15 }}
-                >
-                  {card.text}
-                </motion.p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0, scale: 0.85, rotate: 140 }}
-          whileInView={{ opacity: 0.9, scale: 1, rotate: 157 }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
-          viewport={{ once: true, amount: 0.2 }}
-          className="absolute z-0 right-[-28px] sm:right-[-40px] top-[40px] sm:top-[50px] w-[160px] sm:w-[220px] md:w-[250px] lg:w-[280px]"
-        >
-          <motion.img
-            src={decoImg}
-            alt="Decorative Element"
-            className="w-full h-full object-contain"
-            animate={{ rotate: [157, 160, 157], scale: [1, 1.05, 1] }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          />
-        </motion.div>
-      </section>
 
       {/* {=================Services we offer====================} */}
       <ServicesCarousel />
@@ -911,20 +673,30 @@ export default function Company() {
 
       {/* ===================== TOOLS ===================== */}
       <motion.section
-        className="w-full bg-black text-white py-16 px-6 md:px-12"
+        className="relative w-full text-white py-16 px-6 md:px-12 overflow-hidden"
         variants={fadeUp(0.05)}
         initial="hidden"
         whileInView="show"
         viewport={{ once: true }}
       >
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+        {/* Background image */}
+        <div
+          className="absolute w-[1342px] h-[772px] rotate-90 bg-cover bg-center opacity-15  z-0"
+          style={{
+            backgroundImage: `url(${bg})`,
+          }}
+        />
+
+
+        {/* Overlay content */}
+        <div className="relative max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-start z-10">
           <div>
             <h2 className="text-[32px] md:text-[40px] lg:text-[48px] font-extrabold mb-6 leading-tight">
               <span className="bg-[radial-gradient(425.56%_425.56%_at_50%_50%,_#8076F4_0%,_#FFFFFF_9.96%)] text-transparent bg-clip-text">
                 Built With the Right Tools for the Job
               </span>
             </h2>
-            <p className="text-gray-400 text-base md:text-[20px] mb-8">
+            <p className="text-gray-300 text-base md:text-[20px] mb-8">
               We use cutting-edge frameworks and platforms to ensure top performance.
             </p>
             <a
@@ -965,6 +737,8 @@ export default function Company() {
         </div>
       </motion.section>
 
+
+
       <div className="relative">
         <img
           src={decoImg1}
@@ -991,8 +765,8 @@ export default function Company() {
         <div className="text-left mb-8 md:mb-12">
           <h2
             className="font-poppins font-semibold text-[32px] sm:text-[40px] md:text-[48px] leading-[1.15]
-                       bg-[radial-gradient(425.56%_425.56%_at_50%_50%,_#8076F4_0%,_#FFFFFF_9.96%)]
-                       text-transparent bg-clip-text"
+                 bg-[radial-gradient(425.56%_425.56%_at_50%_50%,_#8076F4_0%,_#FFFFFF_9.96%)]
+                 text-transparent bg-clip-text"
           >
             Stay Connected
           </h2>
@@ -1000,49 +774,68 @@ export default function Company() {
 
         <div className="relative flex flex-col md:flex-row justify-start md:justify-between items-stretch gap-8 md:gap-10 lg:gap-[80px] max-w-[1292px] mx-auto">
           {[
-            { icon: icon11, title: "Join our Talent Community", text: "Connect with us and be part of a network that values growth and innovation." },
-            { icon: icon22, title: "Latest Opportunities", text: "Explore exciting roles that match your skills and career goals." },
-            { icon: icon33, title: "Job Alerts", text: "Stay updated with personalized alerts on new openings and opportunities." },
+            {
+              icon: icon11,
+              title: "Join our Talent Community",
+              text: "Connect with us and be part of a network that values growth and innovation.",
+            },
+            {
+              icon: icon22,
+              title: "Latest Opportunities",
+              text: "Explore exciting roles that match your skills and career goals.",
+            },
+            {
+              icon: icon33,
+              title: "Job Alerts",
+              text: "Stay updated with personalized alerts on new openings and opportunities.",
+            },
           ].map((card, i) => (
-            <motion.div
+            <div
               key={i}
-              variants={fadeUp(i * 0.15)}
-              initial="hidden"
-              whileInView="show"
-              viewport={{ once: true, amount: 0.25 }}
-              whileHover={{
-                y: -8,
-                scale: 1.03,
-                background: "linear-gradient(180deg, rgba(99,102,241,1) 0%, rgba(168,85,247,1) 100%)",
-                boxShadow: "0px 10px 40px rgba(128,118,244,0.3), 0px 2px 10px rgba(255,255,255,0.1)",
-                transition: { duration: 0.4, ease: "easeOut" },
-              }}
-              className="relative flex flex-col justify-between text-center rounded-xl p-8 sm:p-10 w-full max-w-[380px] mx-auto min-h-[380px] sm:min-h-[420px] border border-[#2b2f36] bg-[#111215] transition-all duration-500"
+              className="group relative flex flex-col justify-between text-center rounded-xl p-8 sm:p-10 w-full max-w-[380px] mx-auto min-h-[380px] sm:min-h-[420px] 
+                   border border-[#2b2f36] bg-[#111215] 
+                   transition-all duration-500 hover:-translate-y-2 hover:scale-[1.03] 
+                   hover:bg-gradient-to-b hover:from-[#6366F1] hover:to-[#A855F7] 
+                   hover:shadow-[0px_10px_40px_rgba(128,118,244,0.3),0px_2px_10px_rgba(255,255,255,0.1)]"
             >
-              <motion.div className="flex justify-center mb-6" whileHover={{ scale: 1.06, rotate: 1 }} transition={{ duration: 0.25 }}>
-                <img src={card.icon} alt={card.title} className="w-[84px] sm:w-[110px] md:w-[128px] h-auto object-contain" />
-              </motion.div>
+              {/* Icon */}
+              <div className="flex justify-center mb-6 transition-transform duration-300 group-hover:scale-105 group-hover:rotate-1">
+                <img
+                  src={card.icon}
+                  alt={card.title}
+                  className="w-[84px] sm:w-[110px] md:w-[128px] h-auto object-contain"
+                />
+              </div>
 
+              {/* Text */}
               <div>
                 <h3 className="text-white font-poppins font-semibold text-[18px] sm:text-[20px] md:text-[22px] leading-snug mb-3 sm:mb-4">
                   {card.title}
                 </h3>
-                <p className="font-poppins text-[14px] sm:text-[16px] leading-[24px] sm:leading-[26px]">{card.text}</p>
+                <p className="font-poppins text-[14px] sm:text-[16px] leading-[24px] sm:leading-[26px]">
+                  {card.text}
+                </p>
               </div>
 
-              <motion.div whileHover={{ x: 6 }} transition={{ duration: 0.25 }} className="flex items-center justify-center sm:justify-end mt-6 sm:mt-8 gap-2 cursor-pointer">
+              {/* Learn More Button */}
+              <div className="flex items-center justify-center sm:justify-end mt-6 sm:mt-8 gap-2 cursor-pointer transition-transform duration-300 hover:translate-x-1">
                 <span className="text-[15px] sm:text-[16px] font-medium">Learn more</span>
                 <div className="relative w-[44px] sm:w-[56px] h-[44px] sm:h-[56px] -ml-2 sm:-ml-3">
                   <img src={Ellipse} alt="ellipse" className="w-full h-full" />
                   <span className="absolute inset-0 flex items-center justify-center text-white text-xl -ml-2 sm:-ml-3">
-                    <img src={narrow} alt="arrow" className="w-[9px] sm:w-[11.5px] h-[17px] sm:h-[20px] transition-transform duration-300 group-hover:translate-x-1" />
+                    <img
+                      src={narrow}
+                      alt="arrow"
+                      className="w-[9px] sm:w-[11.5px] h-[17px] sm:h-[20px] transition-transform duration-300 group-hover:translate-x-1"
+                    />
                   </span>
                 </div>
-              </motion.div>
-            </motion.div>
+              </div>
+            </div>
           ))}
         </div>
       </section>
+
 
       {/* ===================== RESOURCES ===================== */}
       <section className="bg-black text-white mx-auto">
