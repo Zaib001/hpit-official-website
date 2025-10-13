@@ -34,6 +34,8 @@ import WirelessAndMobilityServices from "./NewPages/WirelessAndMobilityServices"
 import Temp from "./NewPages/temp";
 import WhatWeDoSection from "./components/WhatWeDoSection";
 import DigitalTransformation from "./pages/DigitalTransformation";
+import DataAnalytics from "./pages/DataAnalytics";
+import DigitalInfrastructure from "./pages/DigitalInfrastructure";
 
 const queryClient = new QueryClient();
 
@@ -71,6 +73,8 @@ const App = () => (
 
               <Route path="/30" element={<WirelessAndMobilityServices />} />
               <Route path="/31" element={<DigitalTransformation />} />
+              <Route path="/32" element={<DataAnalytics />} />
+              <Route path="/33" element={<DigitalInfrastructure />} />
 
               <Route path="/temp" element={<Temp />} />
               <Route
