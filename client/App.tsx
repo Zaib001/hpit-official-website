@@ -36,6 +36,7 @@ import WhatWeDoSection from "./components/WhatWeDoSection";
 import DigitalTransformation from "./pages/DigitalTransformation";
 import DataAnalytics from "./pages/DataAnalytics";
 import DigitalInfrastructure from "./pages/DigitalInfrastructure";
+import ModrenItInfrastructure from "./pages/ModrenItInfrastructure";
 
 const queryClient = new QueryClient();
 
@@ -75,6 +76,7 @@ const App = () => (
               <Route path="/31" element={<DigitalTransformation />} />
               <Route path="/32" element={<DataAnalytics />} />
               <Route path="/33" element={<DigitalInfrastructure />} />
+              <Route path="/35" element={<ModrenItInfrastructure />} />
 
               <Route path="/temp" element={<Temp />} />
               <Route

@@ -16,19 +16,11 @@ export default function CoreInfrastructure() {
             className="font-[600] text-[28px] sm:text-[32px] md:text-[36px] lg:text-[40px] leading-[36px] tracking-[0.01em]"
             style={{ fontFamily: "Poppins, sans-serif" }}
           >
-            Core{" "}
             <span className="bg-[radial-gradient(254%_254%_at_50%_50%,_#A49CFD_0%,_#FFFFFF_9.99%)] bg-clip-text text-transparent">
-              Infrastructure
+              What a Future-Ready <br/>Infrastructure Should Deliver
             </span>{" "}
-            Capabilities
           </h2>
-          <p
-            className="mt-4 text-gray-400 text-[20px] leading-[32px] tracking-[0.01em] font-[400] max-w-2xl"
-            style={{ fontFamily: "Poppins, sans-serif" }}
-          >
-            Build modern, scalable, and secure foundations for your digital
-            enterprise with our comprehensive infrastructure capabilities.
-          </p>
+        
         </motion.div>
 
         {/* Cards - Responsive Grid */}
@@ -57,14 +49,12 @@ export default function CoreInfrastructure() {
               className="text-[28px] font-[600] leading-[36px] tracking-[0.01em] mb-6"
               style={{ fontFamily: "Poppins, sans-serif" }}
             >
-              Hybrid Cloud Enablement
-            </h3>
+Elastic Scale On-Demand            </h3>
             <p
               className="text-gray-400 text-[20px] leading-[32px] tracking-[0.01em]"
               style={{ fontFamily: "Poppins, sans-serif" }}
             >
-              Seamless orchestration across on-prem and multi-cloud
-              environments.
+              Adapt capacity across cloud and on-prem without delays or cost bloat.
             </p>
           </motion.div>
 
@@ -86,13 +76,13 @@ export default function CoreInfrastructure() {
               className="text-[28px] font-[600] leading-[36px] tracking-[0.01em] mb-6"
               style={{ fontFamily: "Poppins, sans-serif" }}
             >
-              Infrastructure as Code
+              Built-in Resilience
             </h3>
             <p
               className="text-gray-400 text-[20px] leading-[32px] tracking-[0.01em]"
               style={{ fontFamily: "Poppins, sans-serif" }}
             >
-              Automated provisioning and versioned infra aligned with DevOps.
+              Design for high availability, disaster recovery, and zero-trust security.
             </p>
           </motion.div>
 
@@ -114,14 +104,13 @@ export default function CoreInfrastructure() {
               className="text-[28px] font-[600] leading-[36px] tracking-[0.01em] mb-6"
               style={{ fontFamily: "Poppins, sans-serif" }}
             >
-              Network Modernization
+              Faster Time to Innovation
             </h3>
             <p
               className="text-gray-400 text-[20px] leading-[32px] tracking-[0.01em]"
               style={{ fontFamily: "Poppins, sans-serif" }}
             >
-              Optimize performance with SD-WAN, 5G, and secure edge
-              connectivity.
+              Reduce provisioning delays and release cycles through automation and composability.
             </p>
           </motion.div>
 
@@ -143,14 +132,13 @@ export default function CoreInfrastructure() {
               className="text-[28px] font-[600] leading-[36px] tracking-[0.01em] mb-6"
               style={{ fontFamily: "Poppins, sans-serif" }}
             >
-              Digital Workplace Readiness
+              Visibility and Control
             </h3>
             <p
               className="text-gray-400 text-[20px] leading-[32px] tracking-[0.01em]"
               style={{ fontFamily: "Poppins, sans-serif" }}
             >
-              Ensure infrastructure supports seamless, secure remote
-              collaboration.
+              Monitor, manage, and optimize IT from a single pane of glass.
             </p>
           </motion.div>
         </motion.div>
