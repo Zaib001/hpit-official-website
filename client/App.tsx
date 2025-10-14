@@ -37,6 +37,10 @@ import DigitalTransformation from "./pages/DigitalTransformation";
 import DataAnalytics from "./pages/DataAnalytics";
 import DigitalInfrastructure from "./pages/DigitalInfrastructure";
 import ModrenItInfrastructure from "./pages/ModrenItInfrastructure";
+import InfrastructureAutomation from "./pages/InfrastructureAutomation";
+import ManagedServices from "./pages/ManagedServices";
+import TechSupportService from "./pages/TechSupportService";
+import HighPerformaceComputing from "./pages/HighPerformaceComputing";
 
 const queryClient = new QueryClient();
 
@@ -76,7 +80,14 @@ const App = () => (
               <Route path="/31" element={<DigitalTransformation />} />
               <Route path="/32" element={<DataAnalytics />} />
               <Route path="/33" element={<DigitalInfrastructure />} />
+              <Route path="/34" element={<InfrastructureAutomation />} />
+
               <Route path="/35" element={<ModrenItInfrastructure />} />
+              <Route path="/36" element={<ManagedServices />} />
+              <Route path="/37" element={<TechSupportService />} />
+              <Route path="/38" element={<HighPerformaceComputing />} />
+
+
 
               <Route path="/temp" element={<Temp />} />
               <Route

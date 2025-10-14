@@ -7,34 +7,7 @@ import sv5 from "../Images/DA/sv5.svg";
 
 
 export default function StrategicAnalytics() {
-    const topCard = {
-        icon: sv1,
-        title: "Real-Time Business Intelligence",
-        desc: "Deliver timely insights through dynamic dashboards, automated alerts, and interactive reports tailored to decision-makers.",
-    };
 
-    const bottomCards = [
-        {
-            icon: sv2,
-            title: "Advanced Predictive Modeling",
-            desc: "Forecast trends and behaviors using AI-powered algorithms and pattern detection.",
-        },
-        {
-            icon: sv3,
-            title: "Customer & Market Insights",
-            desc: "Understand your audience deeper to deliver hyper-relevant products and campaigns.",
-        },
-        {
-            icon: sv4,
-            title: "Unified Data Foundation",
-            desc: "Integrate structured and unstructured data across cloud, on-prem, and hybrid sources.",
-        },
-        {
-            icon: sv5,
-            title: "Data Governance & Compliance",
-            desc: "Ensure quality, security, and audit-readiness across your data lifecycle.",
-        },
-    ];
 
     return (
         <section className="bg-[#050505] text-white py-20 px-6 sm:px-10 lg:px-24 overflow-hidden">

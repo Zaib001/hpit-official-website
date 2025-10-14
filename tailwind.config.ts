@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import type { PluginAPI } from 'tailwindcss/types/config';
 
 export default {
   darkMode: ["class"],
@@ -90,5 +91,23 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate"),
+     /**
+     * @param {PluginAPI} api
+     */
+    function ({ addUtilities }: PluginAPI) {
+      addUtilities({
+        '.stroke-white': {
+          '-webkit-text-stroke': '1.5px white',
+        },
+        '.stroke-2': {
+          '-webkit-text-stroke-width': '2px',
+        },
+        '.stroke-gray': {
+          '-webkit-text-stroke': '1.5px #9ca3af',
+        },
+      });
+    },
+  ],
+  
 } satisfies Config;
