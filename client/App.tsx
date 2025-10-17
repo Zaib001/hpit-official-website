@@ -45,6 +45,7 @@ import SeamlessWireless from "./pages/SeamlessWireless";
 import BuildYourOwn from "./pages/BuildYourOwn";
 import PoweringTheFuture from "./pages/PoweringTheFuture";
 import Advancedexplained from "./pages/Advancedexplained";
+import IOT from "./pages/IOT";
 
 const queryClient = new QueryClient();
 
@@ -94,7 +95,8 @@ const App = () => (
               <Route path="/39" element={<BuildYourOwn />} />
               <Route path="/40" element={<SeamlessWireless />} />
               <Route path="/41" element={<PoweringTheFuture />} />
-              <Route path="/42" element={<Advancedexplained />} />
+              <Route path="/42" element={<IOT />} />
+              <Route path="/43" element={<Advancedexplained />} />
 
 
               <Route path="/temp" element={<Temp />} />
