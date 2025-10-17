@@ -26,9 +26,6 @@ import res1 from "@/Images/HPC/r1.png";
 import res2 from "@/Images/HPC/r2.png";
 import res3 from "@/Images/HPC/r3.png";
 
-import img3 from "../svg/Frame 458.svg";
-
-
 import i2 from "../Images/DGT/i2.png";
 import InsightSection from "@/components/InsightSection";
 
