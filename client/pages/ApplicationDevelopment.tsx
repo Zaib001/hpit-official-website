@@ -18,7 +18,6 @@ import HandHeart from "../svg/Group 18.svg";
 import Thursday from "../svg/Thursday.svg";
 import Gener8 from "../svg/Gener8.svg";
 import MindfulChef from "../svg/MindfulChef.svg";
-import reverseArrow from "../svg/reverseArrow.svg";
 import Flutter from "../svg/flutter.svg";
 import AWS from "../svg/AWS.svg";
 import Figma from "../svg/Figma.svg";
@@ -30,6 +29,23 @@ import PaddingWrapper from "@/components/PaddingWrapper";
 import Ellipse from "../svg/Ellipse 10.svg";
 import arrow from "../svg/Arrow 1.svg";
 import appDev from "../Images/app-dev.webp";
+import reverseArrow from "../svg/reverseArrow.svg";
+import group134 from "../Images/aws.png";
+import group136 from "../svg/dynatrace.svg";
+import group137 from "../Images/sap.png";
+import group138 from "../Images/dynatrace.png";
+import vector3 from "../Images/Cloudera.png";
+import vector4 from "../Images/ot.png";
+import narrow from "@/svg/Arrow 1.svg";
+import InsightSection from "@/components/InsightSection";
+import i1 from "../Images/AD/i1.jpg";
+import i2i from "../Images/AD/i2.jpg";
+import i3 from "../Images/AD/i3.jpg";
+import i2 from "../Images/DGT/i2.png";
+import res1 from "@/Images/AD/r1.png";
+import res2 from "@/Images/AD/r2.png";
+import res3 from "@/Images/AD/r3.png";
+
 
 // Reusable animation helpers
 const fadeUp = (delay = 0) => ({
@@ -38,6 +54,64 @@ const fadeUp = (delay = 0) => ({
   transition: { duration: 0.6, ease: "easeOut", delay },
   viewport: { once: true, amount: 0.2 },
 });
+const pop = (delay = 0) => ({
+  hidden: { opacity: 0, scale: 0.96 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.6, delay } },
+});
+
+
+function LogoCard({
+  logo,
+  label,
+  small,
+  tiny,
+}: {
+  logo: string;
+  label: string;
+  small?: boolean;
+  tiny?: boolean;
+}) {
+  return (
+    <div
+      className="bg-[#111215] rounded-lg px-6 py-6 flex flex-col items-center justify-center border border-transparent
+                 transition-all duration-300 hover:border-[#A49CFD]/40 hover:shadow-[0_0_24px_rgba(164,156,253,0.08)] hover:-translate-y-1 group"
+    >
+      <img
+        src={logo}
+        alt={label}
+        className={`object-contain transition duration-300 grayscale group-hover:grayscale-0 ${tiny ? "w-[48px]" : small ? "w-[64px]" : "w-[120px]"
+          }`}
+      />
+      <p className="text-white text-sm md:text-base mt-4 whitespace-nowrap opacity-80 group-hover:opacity-100">
+        {label}
+      </p>
+    </div>
+  );
+}
+
+const cards = [
+  {
+    img: i2i,
+    title: "AGILE METHODS",
+    desc: "Discover how agile practices speed up development and reduce risks.",
+  },
+  {
+    img: i3,
+    title: "CLOUD-NATIVE APPS",
+    desc: "Learn why modern apps thrive on cloud-native architecture.",
+  },
+  {
+    img: i1,
+    title: "USER-CENTRIC DESIGN",
+    desc: "See how focusing on users drives better adoption and success.",
+  },
+  {
+    img: i2,
+    title: "SMART OPERATIONS",
+    desc: "They optimize real-time performance by predicting issues before they occur.",
+  },
+];
+
 
 
 export default function ApplicationDevelopment() {
@@ -177,54 +251,109 @@ export default function ApplicationDevelopment() {
             We build secure, scalable applications designed to meet complex
             business needs and drive lasting impact.
           </p>
-
-          <motion.div
-            className="grid grid-cols-2 gap-4 mb-4"
-            initial="hidden"
-            whileInView="visible"
-          >
+          <div className="flex flex-col md:flex-row">
             <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
+              className="flex flex-col gap-4 items-center md:items-start mb-4 md:mb-0"
+              initial="hidden"
+              whileInView="visible"
             >
-              <img
-                src={Healthcare}
-                alt="Healthcare"
-                className="w-60 h-80 object-cover rounded"
-              />
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                className="relative"
+              >
+                <img
+                  src={Healthcare}
+                  alt="Healthcare"
+                  className="w-[240px] h-[296px] object-cover rounded"
+                />
+                <div className="flex justify-between absolute bottom-[6px] w-full items-center px-4">
+                  <p className="">Healthcare</p>
+                  <button className="p-3 border hover:bg-[#DC1414] transition-all border-[#DC1414] rounded-full"><img src={arrow} className="w-[10.6px]" alt="" /></button>
+                </div>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                className="relative"
+              >
+                <img
+                  src={Enterprise}
+                  alt="E-commerce"
+                  className="w-[240px] h-[139px] object-cover rounded"
+                />
+                <div className="flex justify-between absolute bottom-[6px] w-full items-center px-4">
+                  <p className="">Healthcare</p>
+                  <button className="p-3 border hover:bg-[#DC1414] transition-all border-[#DC1414] rounded-full"><img src={arrow} className="w-[10.6px]" alt="" /></button>
+                </div>
+              </motion.div>
             </motion.div>
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <img
-                src={Ecommerce}
-                alt="E-commerce"
-                className="w-[243px] h-[296px] object-cover rounded"
-              />
-            </motion.div>
-          </motion.div>
 
-          {/* Bottom Row */}
-          <div className="grid grid-cols-5 gap-4">
-            {[Enterprise, Fintech, Edtech, Manufacturing, Government].map(
-              (img, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: i * 0.1 }}
-                >
-                  <img
-                    src={img}
-                    alt={`Sector ${i}`}
-                    className="w-[240px] h-[139px] object-cover rounded"
-                  />
-                </motion.div>
-              ),
-            )}
+            {/* Mid Row */}
+            <div className="flex flex-col md:flex-row items-center md:items-end mx-4 gap-4">
+              {[Fintech, Edtech, Manufacturing].map(
+                (img, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: i * 0.1 }}
+                    className="relative"
+                  >
+                    <img
+                      src={img}
+                      alt={`Sector ${i}`}
+                      className="w-[240px] h-[296px] object-cover rounded"
+                    />
+                    <div className="flex justify-between absolute bottom-[6px] w-full items-center px-4">
+                      <p className="">Healthcare</p>
+                      <button className="p-3 border hover:bg-[#DC1414] transition-all border-[#DC1414] rounded-full"><img src={arrow} className="w-[10.6px]" alt="" /></button>
+                    </div>
+                  </motion.div>
+                ),
+              )}
+            </div>
+            <motion.div
+              className="flex flex-col gap-4 items-center md:items-start mt-4 md:mt-0"
+              initial="hidden"
+              whileInView="visible"
+            >
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                className="relative"
+              >
+                <img
+                  src={Ecommerce}
+                  alt="Healthcare"
+                  className="w-[240px] h-[296px] object-cover rounded"
+                />
+                <div className="flex justify-between absolute bottom-[6px] w-full items-center px-4">
+                  <p className="">Healthcare</p>
+                  <button className="p-3 border hover:bg-[#DC1414] transition-all border-[#DC1414] rounded-full"><img src={arrow} className="w-[10.6px]" alt="" /></button>
+                </div>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                className="relative"
+              >
+                <img
+                  src={Government}
+                  alt="E-commerce"
+                  className="w-[240px] h-[139px] object-cover rounded"
+                />
+                <div className="flex justify-between absolute bottom-[6px] w-full items-center px-4">
+                  <p className="">Healthcare</p>
+                  <button className="p-3 border hover:bg-[#DC1414] transition-all border-[#DC1414] rounded-full"><img src={arrow} className="w-[10.6px]" alt="" /></button>
+                </div>
+              </motion.div>
+            </motion.div>
+
           </div>
         </motion.div>
 
@@ -238,19 +367,16 @@ export default function ApplicationDevelopment() {
           <div className="self-center px-4">
             <h2
               className="text-5xl font-extrabold leading-tight mb-8"
-              style={{ marginLeft: "-60px" }}
             >
               Our
-              <span className="bg-gradient-to-r from-white to-purple-400 text-transparent bg-clip-text">
-                {" "}
-                Agile
+              A<span className="bg-gradient-to-t from-[#8076F4] to-40% to-white text-transparent bg-clip-text">
+                gile
               </span>
               <br />
-              Development Journey
+              Devel<span className="bg-gradient-to-b from-[#8076F4] to-70% to-white text-transparent bg-clip-text">opment</span> Journey
             </h2>
             <p
-              className="text-gray-400 text-xl leading-relaxed max-w-xl"
-              style={{ marginLeft: "-60px" }}
+              className="text-xl leading-relaxed max-w-xl"
             >
               A Proven, Collaborative Process From Idea to Launch and Beyond
             </p>
@@ -258,7 +384,7 @@ export default function ApplicationDevelopment() {
 
           <div
             className="grid grid-cols-1 md:grid-cols-3 gap-8"
-            style={{ marginTop: "80px", marginLeft: "-50px" }}
+            style={{ marginTop: "80px" }}
           >
             {steps.map((step, index) => (
               <motion.div
@@ -278,115 +404,137 @@ export default function ApplicationDevelopment() {
         </motion.div>
 
         {/* Tools Section */}
-        <motion.div
+        <motion.section
           className="w-full bg-black text-white py-16 px-6 md:px-12"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          variants={fadeUp(0.05)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
         >
           <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 className="text-4xl font-extrabold mb-6 leading-tight">
-                Built{" "}
-                <span className="bg-gradient-to-r from-white to-purple-400 text-transparent bg-clip-text">
-                  With the
+            <div>
+              <h2 className="text-[32px] md:text-[40px] lg:text-[48px] font-extrabold mb-6 leading-tight">
+                <span className="bg-[radial-gradient(425.56%_425.56%_at_50%_50%,_#8076F4_0%,_#FFFFFF_9.96%)] text-transparent bg-clip-text">
+                  Built With the Right Tools for the Job
                 </span>
-                <br />
-                Right Tools{" "}
-                <span className="bg-gradient-to-r from-white to-purple-400 text-transparent bg-clip-text">
-                  for the
-                </span>{" "}
-                Job
               </h2>
-              <p className="text-gray-400 text-lg mb-8">
-                We use cutting-edge frameworks and platforms to ensure top
-                performance.
+              <p className="text-gray-400 text-base md:text-[20px] mb-8">
+                We use cutting-edge frameworks and platforms to ensure top performance.
               </p>
-            </motion.div>
+              <a
+                href="#"
+                className="inline-flex items-center gap-2 text-white font-medium group rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A49CFD]/60"
+                style={{ fontSize: "16px" }}
+              >
+                Get Started
+                <span className="relative w-[56px] h-[56px] -ml-4 inline-flex items-center justify-center">
+                  <img src={Ellipse} alt="" className="w-full h-full" />
+                  <img
+                    src={narrow}
+                    alt=""
+                    className="absolute w-[11.5px] h-5 transition-transform duration-300 group-hover:translate-x-0.5"
+                  />
+                </span>
+              </a>
+            </div>
 
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6 }}
+              className="hidden md:flex justify-center items-center"
+              variants={pop(0.1)}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
             >
-              <img
-                src={reverseArrow}
-                alt="Arrow Illustration"
-                className="w-30 h-auto"
-              />
+              <img src={reverseArrow} alt="Arrow Illustration" className="w-[150px] h-[130px]" />
             </motion.div>
 
-            <motion.div className="grid grid-cols-3 gap-4">
-              {[Next, ReactNative, Angular, Flutter, Figma, AWS].map(
-                (icon, i) => (
-                  <motion.div
-                    key={i}
-                    className="bg-[#1f1f1f] p-6 rounded-md flex flex-col items-center"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: i * 0.1 }}
-                  >
-                    <img src={icon} className="w-10 h-10 mb-3" />
-                  </motion.div>
-                ),
-              )}
-            </motion.div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+              <LogoCard logo={group136} label="Databricks" />
+              <LogoCard logo={vector3} label="Cloudera" />
+              <LogoCard logo={group137} label="SAP" small />
+              <LogoCard logo={vector4} label="OpenText" tiny />
+              <LogoCard logo={group138} label="Dynatrace" />
+              <LogoCard logo={group134} label="AWS" />
+            </div>
           </div>
-        </motion.div>
+        </motion.section>
 
-        {/* Achievements Section */}
-        <motion.div
-          className="w-full bg-black text-white py-16 px-6 md:px-12"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <div className="max-w-5xl mx-auto mb-12" style={{ marginLeft: "80px" }}>
-            <h2 className="text-4xl font-extrabold mb-4 leading-tight">
-              See What We’ve <br />
-              <span className="bg-gradient-to-r from-white to-purple-400 text-transparent bg-clip-text">
-                Achieved Together
-              </span>
-            </h2>
-            <p className="text-gray-400 text-lg">
-              Discover how our solutions solved real problems and delivered
-              measurable business outcomes
-            </p>
-          </div>
 
-          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
-            {[MindfulChef, Thursday, Gener8].map((logo, i) => (
-              <motion.div
-                key={i}
-                className="bg-[#2c2e33] p-6 rounded-md flex flex-col justify-between"
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: i * 0.2 }}
-              >
-                <img src={logo} alt={`Logo ${i}`} className="mb-6 mx-auto" />
+        <InsightSection
+          title="Related Insights"
+          cards={cards}
+          autoSlideInterval={6000}
+        />
+        <section className="bg-black text-white mx-auto">
+          <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-0 py-10">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr_1fr] gap-6 items-start">
+              {/* Left: Title + Illustration */}
+              <motion.div className="relative">
+                <h2 className="text-[36px] sm:text-[44px] font-extrabold mb-6">Resources</h2>
+
+                {/* Red ellipse accent */}
+                <div className="absolute -top-4 -left-4 h-8 w-8 rounded-full bg-[#FF5A5A] blur-[10px] opacity-80"></div>
+
+                {/* Big illustration (replace src) */}
+                <img
+                  src={res1}
+                  alt="Ring"
+                  className="w-full max-w-[382px] h-[310px] sm:h-[260px] object-contain"
+                />
               </motion.div>
-            ))}
-          </div>
 
-          <motion.div
-            className="flex justify-end mt-8 space-x-4"
-            style={{ marginRight: "70px" }}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <button className="w-10 h-10 border border-red-500 rounded-full flex items-center justify-center">
-              <span className="text-red-500 text-xl">&lt;</span>
-            </button>
-            <button className="w-10 h-10 border border-red-500 rounded-full flex items-center justify-center">
-              <span className="text-red-500 text-xl">&gt;</span>
-            </button>
-          </motion.div>
-        </motion.div>
+              {/* Card 1 */}
+              <motion.article
+                className="rounded-xl min-h-[320px] bg-[linear-gradient(180deg,#343A43_0%,#22272F_100%)] p-6 shadow-[0_1px_0_0_rgba(255,255,255,0.12)_inset]"
+                whileHover={{ y: -2 }}
+              >
+                <div className="mb-4">
+                  <img src={res2} alt="" className="h-16 w-16 object-contain" />
+                </div>
+                <h3 className="text-lg sm:text-xl font-semibold">HBR’s Digital Transformation</h3>
+                <p className="mt-3 text-white/75 text-sm leading-6">
+                  A curated set of Harvard Business Review articles on digital innovation, strategy, and leadership in the digital age.
+                </p>
+
+                <button type="button" className="group mt-6 inline-flex items-center gap-3 text-white/85">
+                  <span className="underline-offset-4 group-hover:underline">Learn more</span>
+                  <div className="relative w-[56px] h-[56px]">
+                    <img src={Ellipse} alt="ellipse" className="w-full h-full" />
+                    {/* Arrow centered inside ellipse */}
+                    <span className="absolute inset-0 flex items-center justify-center text-white text-xl">
+                      <img src={narrow} alt="arrow" className="w-[11.5px] h-[20px]" />
+                    </span>
+                  </div>
+                </button>
+              </motion.article>
+
+              {/* Card 2 */}
+              <motion.article
+                className="rounded-xl min-h-[320px] bg-[linear-gradient(180deg,#343A43_0%,#22272F_100%)] p-6 shadow-[0_1px_0_0_rgba(255,255,255,0.12)_inset]"
+                whileHover={{ y: -2 }}
+              >
+                <div className="mb-4">
+                  <img src={res3} alt="" className="h-16 w-16 object-contain" />
+                </div>
+                <h3 className="text-lg sm:text-xl font-semibold">Digital Transformation</h3>
+                <p className="mt-3 text-white/75 text-sm leading-6">
+                  An insightful report covering trends, challenges, and best practices for driving digital transformation.
+                </p>
+
+                <button type="button" className="group mt-6 inline-flex items-center gap-3 text-white/85">
+                  <span className="underline-offset-4 group-hover:underline">Learn more</span>
+                  <div className="relative w-[56px] h-[56px]">
+                    <img src={Ellipse} alt="ellipse" className="w-full h-full" />
+                    {/* Arrow centered inside ellipse */}
+                    <span className="absolute inset-0 flex items-center justify-center text-white text-xl">
+                      <img src={narrow} alt="arrow" className="w-[11.5px] h-[20px]" />
+                    </span>
+                  </div>
+                </button>
+              </motion.article>
+            </div>
+          </div>
+        </section>
       </PaddingWrapper>
     </div>
   );

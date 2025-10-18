@@ -22,9 +22,11 @@ import redfour from "../svg/redfour.svg";
 import redfive from "../svg/redfive.svg";
 import img from "../Images/Pexels Photo by Photo By_ Kaboompics.com.jpg";
 import { motion } from "framer-motion";
+import PaddingWrapper from "@/components/PaddingWrapper";
 
 export default function ApplicationTransformation() {
   return (
+    <PaddingWrapper>
     <div className="min-h-screen flex flex-col bg-black">
       {/* Hero Section */}
       <motion.div
@@ -81,8 +83,8 @@ export default function ApplicationTransformation() {
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-[56px] font-extrabold mb-2">
-              <span className="bg-[radial-gradient(425.56%_425.56%_at_50%_50%,_#8076F4_0%,_#FFFFFF_9.96%)] bg-clip-text text-transparent">
-                More than a facelift it's a full upgrade.
+              <span className="">
+                More <span className="bg-gradient-to-t from-[#8076F4] to-70% to-white text-transparent bg-clip-text">than a</span> facelift it's a f<span className="bg-gradient-to-b from-[#8076F4] to-70% to-white text-transparent bg-clip-text">ull upg</span>rade.
               </span>
             </h2>
 
@@ -139,12 +141,12 @@ export default function ApplicationTransformation() {
         </div>
       </motion.div>
       <motion.div
-        className="bg-black text-white px-4 lg:gap-x-18 sm:px-8 py-12 border-t border-b border-gray-700"
+        className="bg-black text-white px-4 lg:gap-x-18 sm:px-8 py-12 border-t border-b border-[#22252B]"
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
       >
-        <div className="max-w-8xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-gray-700 text-center">
+        <div className="max-w-8xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 sm:divide-x divide-[#22252B] text-center">
           {[
             {
               img: sixtypercent,
@@ -221,7 +223,7 @@ export default function ApplicationTransformation() {
 
           {/* Cards Section */}
           <div
-            className="mt-12 grid md:grid-cols-3 gap-[120px] bg-gradient-to-r from-gray-900 to-gray-800 p-8 rounded-l"
+            className="mt-12 grid md:grid-cols-3 gap-[120px] bg-gradient-to-t from-[#80C2F990]  to-[#111215CC]  p-8 rounded-l"
             style={{ marginRight: "-110px" }}
           >
             {[
@@ -482,5 +484,6 @@ export default function ApplicationTransformation() {
       </div>
       ;<ClientExperience></ClientExperience>
     </div>
+    </PaddingWrapper>
   );
 }

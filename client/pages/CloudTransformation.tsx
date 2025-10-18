@@ -13,6 +13,25 @@ import img from "../Images/Frame 417.png";
 import ClientExperience from "@/components/ClientExperience";
 import fiftypercent from "../svg/fiftypercent.svg";
 import eightypercent from "../svg/eightypercent.svg";
+import PaddingWrapper from "@/components/PaddingWrapper";
+import reverseArrow from "../svg/reverseArrow.svg";
+import group134 from "../Images/aws.png";
+import group136 from "../svg/dynatrace.svg";
+import group137 from "../Images/sap.png";
+import group138 from "../Images/dynatrace.png";
+import vector3 from "../Images/Cloudera.png";
+import vector4 from "../Images/ot.png";
+import narrow from "@/svg/Arrow 1.svg";
+import InsightSection from "@/components/InsightSection";
+import i1 from "../Images/AD/i1.jpg";
+import i2i from "../Images/AD/i2.jpg";
+import i3 from "../Images/AD/i3.jpg";
+import i2 from "../Images/DGT/i2.png";
+import res1 from "@/Images/AD/r1.png";
+import res2 from "@/Images/AD/r2.png";
+import res3 from "@/Images/AD/r3.png";
+
+
 
 // ✅ Reusable scroll wrapper
 const FadeInSection = ({ children, delay = 0 }) => {
@@ -37,6 +56,73 @@ const FadeInSection = ({ children, delay = 0 }) => {
     </motion.div>
   );
 };
+
+// Reusable animation helpers
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 28 },
+  whileInView: { opacity: 1, y: 0 },
+  transition: { duration: 0.6, ease: "easeOut", delay },
+  viewport: { once: true, amount: 0.2 },
+});
+const pop = (delay = 0) => ({
+  hidden: { opacity: 0, scale: 0.96 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.6, delay } },
+});
+
+
+function LogoCard({
+  logo,
+  label,
+  small,
+  tiny,
+}: {
+  logo: string;
+  label: string;
+  small?: boolean;
+  tiny?: boolean;
+}) {
+  return (
+    <div
+      className="bg-[#111215] rounded-lg px-6 py-6 flex flex-col items-center justify-center border border-transparent
+                 transition-all duration-300 hover:border-[#A49CFD]/40 hover:shadow-[0_0_24px_rgba(164,156,253,0.08)] hover:-translate-y-1 group"
+    >
+      <img
+        src={logo}
+        alt={label}
+        className={`object-contain transition duration-300 grayscale group-hover:grayscale-0 ${tiny ? "w-[48px]" : small ? "w-[64px]" : "w-[120px]"
+          }`}
+      />
+      <p className="text-white text-sm md:text-base mt-4 whitespace-nowrap opacity-80 group-hover:opacity-100">
+        {label}
+      </p>
+    </div>
+  );
+}
+
+const cards = [
+  {
+    img: i2i,
+    title: "AGILE METHODS",
+    desc: "Discover how agile practices speed up development and reduce risks.",
+  },
+  {
+    img: i3,
+    title: "CLOUD-NATIVE APPS",
+    desc: "Learn why modern apps thrive on cloud-native architecture.",
+  },
+  {
+    img: i1,
+    title: "USER-CENTRIC DESIGN",
+    desc: "See how focusing on users drives better adoption and success.",
+  },
+  {
+    img: i2,
+    title: "SMART OPERATIONS",
+    desc: "They optimize real-time performance by predicting issues before they occur.",
+  },
+];
+
+
 
 // ✅ Card component with animation
 const Card = ({ title, description }) => {
@@ -107,7 +193,7 @@ export default function CloudTransformation() {
           </div>
         </div>
       </FadeInSection>
-
+<PaddingWrapper>
       {/* MAKE CLOUD FUTURE READY */}
       <FadeInSection delay={0.1}>
         <div className="text-white px-4 sm:px-8 lg:px-20 py-16">
@@ -179,12 +265,12 @@ export default function CloudTransformation() {
 
             {/* Right Grid */}
             <motion.div
-              className="w-[700px]"
+              className="w-[600px]"
               initial={{ opacity: 0, x: 40 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <div className="relative grid grid-cols-2 grid-rows-2 rounded-xl text-sm bg-[#111215]">
+              <div className="relative grid bg-gradient-to-t from-[#DA22FF11] to-[#6A94FF11] grid-cols-2 grid-rows-2 rounded-xl text-sm bg-[#111215]">
                 {[
                   { title: "Assessment & Strategy", desc: "We analyze your current environment and define a transformation roadmap." },
                   { title: "Architecture Design", desc: "Build a secure, and cloud native architecture tailored to your goals." },
@@ -323,10 +409,138 @@ export default function CloudTransformation() {
         </div>
       </FadeInSection>
 
-      {/* CLIENT EXPERIENCE */}
-      <FadeInSection delay={0.3}>
-        <ClientExperience />
-      </FadeInSection>
+      <motion.section
+        className="w-full bg-black text-white py-16 px-6 md:px-12"
+        variants={fadeUp(0.05)}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true }}
+      >
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+          <div>
+            <h2 className="text-[32px] md:text-[40px] lg:text-[48px] font-extrabold mb-6 leading-tight">
+              <span className="bg-[radial-gradient(425.56%_425.56%_at_50%_50%,_#8076F4_0%,_#FFFFFF_9.96%)] text-transparent bg-clip-text">
+                Built With the Right Tools for the Job
+              </span>
+            </h2>
+            <p className="text-gray-400 text-base md:text-[20px] mb-8">
+              We use cutting-edge frameworks and platforms to ensure top performance.
+            </p>
+            <a
+              href="#"
+              className="inline-flex items-center gap-2 text-white font-medium group rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-[#A49CFD]/60"
+              style={{ fontSize: "16px" }}
+            >
+              Get Started
+              <span className="relative w-[56px] h-[56px] -ml-4 inline-flex items-center justify-center">
+                <img src={Ellipse} alt="" className="w-full h-full" />
+                <img
+                  src={narrow}
+                  alt=""
+                  className="absolute w-[11.5px] h-5 transition-transform duration-300 group-hover:translate-x-0.5"
+                />
+              </span>
+            </a>
+          </div>
+
+          <motion.div
+            className="hidden md:flex justify-center items-center"
+            variants={pop(0.1)}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <img src={reverseArrow} alt="Arrow Illustration" className="w-[150px] h-[130px]" />
+          </motion.div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+            <LogoCard logo={group136} label="Databricks" />
+            <LogoCard logo={vector3} label="Cloudera" />
+            <LogoCard logo={group137} label="SAP" small />
+            <LogoCard logo={vector4} label="OpenText" tiny />
+            <LogoCard logo={group138} label="Dynatrace" />
+            <LogoCard logo={group134} label="AWS" />
+          </div>
+        </div>
+      </motion.section>
+
+      <InsightSection
+        title="Related Insights"
+        cards={cards}
+        autoSlideInterval={6000}
+      />
+
+      <section className="bg-black text-white mx-auto">
+        <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-0 py-10">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr_1fr] gap-6 items-start">
+            {/* Left: Title + Illustration */}
+            <motion.div className="relative">
+              <h2 className="text-[36px] sm:text-[44px] font-extrabold mb-6">Resources</h2>
+
+              {/* Red ellipse accent */}
+              <div className="absolute -top-4 -left-4 h-8 w-8 rounded-full bg-[#FF5A5A] blur-[10px] opacity-80"></div>
+
+              {/* Big illustration (replace src) */}
+              <img
+                src={res1}
+                alt="Ring"
+                className="w-full max-w-[382px] h-[310px] sm:h-[260px] object-contain"
+              />
+            </motion.div>
+
+            {/* Card 1 */}
+            <motion.article
+              className="rounded-xl min-h-[320px] bg-[linear-gradient(180deg,#343A43_0%,#22272F_100%)] p-6 shadow-[0_1px_0_0_rgba(255,255,255,0.12)_inset]"
+              whileHover={{ y: -2 }}
+            >
+              <div className="mb-4">
+                <img src={res2} alt="" className="h-16 w-16 object-contain" />
+              </div>
+              <h3 className="text-lg sm:text-xl font-semibold">HBR’s Digital Transformation</h3>
+              <p className="mt-3 text-white/75 text-sm leading-6">
+                A curated set of Harvard Business Review articles on digital innovation, strategy, and leadership in the digital age.
+              </p>
+
+              <button type="button" className="group mt-6 inline-flex items-center gap-3 text-white/85">
+                <span className="underline-offset-4 group-hover:underline">Learn more</span>
+                <div className="relative w-[56px] h-[56px]">
+                  <img src={Ellipse} alt="ellipse" className="w-full h-full" />
+                  {/* Arrow centered inside ellipse */}
+                  <span className="absolute inset-0 flex items-center justify-center text-white text-xl">
+                    <img src={narrow} alt="arrow" className="w-[11.5px] h-[20px]" />
+                  </span>
+                </div>
+              </button>
+            </motion.article>
+
+            {/* Card 2 */}
+            <motion.article
+              className="rounded-xl min-h-[320px] bg-[linear-gradient(180deg,#343A43_0%,#22272F_100%)] p-6 shadow-[0_1px_0_0_rgba(255,255,255,0.12)_inset]"
+              whileHover={{ y: -2 }}
+            >
+              <div className="mb-4">
+                <img src={res3} alt="" className="h-16 w-16 object-contain" />
+              </div>
+              <h3 className="text-lg sm:text-xl font-semibold">Digital Transformation</h3>
+              <p className="mt-3 text-white/75 text-sm leading-6">
+                An insightful report covering trends, challenges, and best practices for driving digital transformation.
+              </p>
+
+              <button type="button" className="group mt-6 inline-flex items-center gap-3 text-white/85">
+                <span className="underline-offset-4 group-hover:underline">Learn more</span>
+                <div className="relative w-[56px] h-[56px]">
+                  <img src={Ellipse} alt="ellipse" className="w-full h-full" />
+                  {/* Arrow centered inside ellipse */}
+                  <span className="absolute inset-0 flex items-center justify-center text-white text-xl">
+                    <img src={narrow} alt="arrow" className="w-[11.5px] h-[20px]" />
+                  </span>
+                </div>
+              </button>
+            </motion.article>
+          </div>
+        </div>
+      </section>
+      </PaddingWrapper>
     </div>
   );
 }
